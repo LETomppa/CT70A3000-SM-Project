@@ -1,0 +1,54 @@
+@startuml
+title Employee Creates "test" Product and Sells 1 Unit
+
+actor Employee
+participant IMS
+participant ProductClass
+participant BillClass
+database Database
+entity FileSystem
+
+== Create Product ==
+
+Employee -> IMS : Clicks "Products"
+IMS -> ProductClass : Open product form
+
+Employee -> ProductClass : Enters product details:\nCategory: Test Category, Supplier: Test Supplier\nName: Test Product, Price: 10, Qty: 100, Status: Active
+Employee -> ProductClass : Clicks "Save"
+
+ProductClass -> Database : Check if the product exists in the database
+Database --> ProductClass : Not found
+
+ProductClass -> Database : Insert Test Product
+Database --> ProductClass : OK
+
+ProductClass --> Employee : "Product Added Successfully"
+
+== Sell 1 Unit ==
+
+Employee -> BillClass : Opens billing form
+
+BillClass -> Database : Load active products
+Database --> BillClass : Product list
+
+Employee -> BillClass : Selects Test Product from product list
+
+Employee -> BillClass : Enters customer details:\nName: Test Customer, Contact No.: 123
+
+Employee -> BillClass : Sets "Quantity" to 1 and clicks "Add|Update"
+BillClass -> BillClass : Add to cart, calculate totals:\nAmount: 1, Discount: 5%, Net Pay: 9.5
+
+Employee -> BillClass : Clicks "Generate Bill"
+
+BillClass -> BillClass : Builds bill
+BillClass -> Database : Update Test Product quantity from 100 to 99
+Database --> BillClass : OK
+
+BillClass -> FileSystem : Save bill to file
+BillClass --> Employee : "Bill has been generated"
+
+Employee -> BillClass : Clicks "Print"
+BillClass -> FileSystem : Send bill to printer
+BillClass --> Employee : Print dialog opens
+
+@enduml
