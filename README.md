@@ -29,3 +29,15 @@ This module lets the user view customer bills and also search for them using the
 
 8. Supplier Management (supplier.py - supplierClass)
 This module is for managing suppliers. The module lets the user search for a supplier using the invoice number. The module also lets the user create, update, or delete suppliers.
+
+# T2. Refactoring
+
+Changed variable and function naming convention to use lowerCamelCase so that it is consistent across all python files
+
+1. dashboard.py
+- Simplified button creation for sidebar to use a for loop
+- Simplified content creation in dashboard to be in the same for loop
+- Made a single function "openModule" that handles all the module openings rather than having multiple functions that essentially do the same thing
+- Simplified updateContent function to use for loop
+
+2. billing.py

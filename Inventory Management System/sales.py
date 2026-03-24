@@ -20,11 +20,11 @@ class salesClass:
         self.root.resizable(False, False)
         self.root.focus_force()
 
-        self.blll_list = []
-        self.var_invoice = StringVar()
+        self.blllList = []
+        self.varInvoice = StringVar()
 
         # --------------- title ---------------------
-        lbl_title = Label(
+        lblTitle = Label(
             self.root,
             text="View Customer Bills",
             font=("goudy old style", 30),
@@ -34,104 +34,104 @@ class salesClass:
             relief=RIDGE
         ).pack(side=TOP, fill=X, padx=10, pady=20)
 
-        lbl_invoice = Label(self.root, text="Invoice No.", font=("times new roman", 15), bg="white")
-        lbl_invoice.place(x=50, y=100)
+        lblInvoice = Label(self.root, text="Invoice No.", font=("times new roman", 15), bg="white")
+        lblInvoice.place(x=50, y=100)
 
-        txt_invoice = Entry(self.root, textvariable=self.var_invoice, font=("times new roman", 15), bg="lightyellow")
-        txt_invoice.place(x=160, y=100, width=180, height=28)
+        txtInvoice = Entry(self.root, textvariable=self.varInvoice, font=("times new roman", 15), bg="lightyellow")
+        txtInvoice.place(x=160, y=100, width=180, height=28)
 
-        btn_search = Button(
+        btnSearch = Button(
             self.root, text="Search", command=self.search,
             font=("times new roman", 15, "bold"),
             bg="#2196f3", fg="white", cursor="hand2"
         ).place(x=360, y=100, width=120, height=28)
 
-        btn_clear = Button(
+        btnClear = Button(
             self.root, text="Clear", command=self.clear,
             font=("times new roman", 15, "bold"),
             bg="lightgray", cursor="hand2"
         ).place(x=490, y=100, width=120, height=28)
 
         # ----------------- bill list -------------------
-        sales_Frame = Frame(self.root, bd=3, relief=RIDGE)
-        sales_Frame.place(x=50, y=140, width=200, height=330)
+        salesFrame = Frame(self.root, bd=3, relief=RIDGE)
+        salesFrame.place(x=50, y=140, width=200, height=330)
 
-        scrolly = Scrollbar(sales_Frame, orient=VERTICAL)
-        self.Sales_List = Listbox(
-            sales_Frame, font=("goudy old style", 15),
+        scrolly = Scrollbar(salesFrame, orient=VERTICAL)
+        self.salesList = Listbox(
+            salesFrame, font=("goudy old style", 15),
             bg="white", yscrollcommand=scrolly.set
         )
         scrolly.pack(side=RIGHT, fill=Y)
-        scrolly.config(command=self.Sales_List.yview)
-        self.Sales_List.pack(fill=BOTH, expand=1)
-        self.Sales_List.bind("<ButtonRelease-1>", self.get_data)
+        scrolly.config(command=self.salesList.yview)
+        self.salesList.pack(fill=BOTH, expand=1)
+        self.salesList.bind("<ButtonRelease-1>", self.getData)
 
         # --------------- bill area ----------------------
-        bill_Frame = Frame(self.root, bd=3, relief=RIDGE)
-        bill_Frame.place(x=280, y=140, width=410, height=330)
+        billFrame = Frame(self.root, bd=3, relief=RIDGE)
+        billFrame.place(x=280, y=140, width=410, height=330)
 
-        lbl_title2 = Label(
-            bill_Frame, text="Customer Bill Area",
+        lblTitle2 = Label(
+            billFrame, text="Customer Bill Area",
             font=("goudy old style", 20), bg="orange"
         ).pack(side=TOP, fill=X)
 
-        scrolly2 = Scrollbar(bill_Frame, orient=VERTICAL)
-        self.bill_area = Text(bill_Frame, bg="lightyellow", yscrollcommand=scrolly2.set)
+        scrolly2 = Scrollbar(billFrame, orient=VERTICAL)
+        self.billArea = Text(billFrame, bg="lightyellow", yscrollcommand=scrolly2.set)
         scrolly2.pack(side=RIGHT, fill=Y)
-        scrolly2.config(command=self.bill_area.yview)
-        self.bill_area.pack(fill=BOTH, expand=1)
+        scrolly2.config(command=self.billArea.yview)
+        self.billArea.pack(fill=BOTH, expand=1)
 
         # ------------- image -----------------
-        image_path = os.path.join(IMAGE_DIR, "cat2.jpg")
-        self.bill_photo = Image.open(image_path)
-        self.bill_photo = self.bill_photo.resize((450, 300))
-        self.bill_photo = ImageTk.PhotoImage(self.bill_photo)
+        imagePath = os.path.join(IMAGE_DIR, "cat2.jpg")
+        self.billPhoto = Image.open(imagePath)
+        self.billPhoto = self.billPhoto.resize((450, 300))
+        self.billPhoto = ImageTk.PhotoImage(self.billPhoto)
 
-        lbl_image = Label(self.root, image=self.bill_photo, bd=0)
-        lbl_image.place(x=700, y=110)
+        lblImage = Label(self.root, image=self.billPhoto, bd=0)
+        lblImage.place(x=700, y=110)
 
         self.show()
 
     # -------------------------------------------------------
     def show(self):
-        del self.blll_list[:]
-        self.Sales_List.delete(0, END)
+        del self.blllList[:]
+        self.salesList.delete(0, END)
 
         for i in os.listdir(BILL_DIR):
             if i.split('.')[-1] == 'txt':
-                self.Sales_List.insert(END, i)
-                self.blll_list.append(i.split('.')[0])
+                self.salesList.insert(END, i)
+                self.blllList.append(i.split('.')[0])
 
-    def get_data(self, ev):
-        index_ = self.Sales_List.curselection()
-        if not index_:
+    def getData(self, ev):
+        index = self.salesList.curselection()
+        if not index:
             return
 
-        file_name = self.Sales_List.get(index_)
-        self.bill_area.delete('1.0', END)
+        fileName = self.salesList.get(index)
+        self.billArea.delete('1.0', END)
 
-        file_path = os.path.join(BILL_DIR, file_name)
-        with open(file_path, 'r') as fp:
+        filePath = os.path.join(BILL_DIR, fileName)
+        with open(filePath, 'r') as fp:
             for i in fp:
-                self.bill_area.insert(END, i)
+                self.billArea.insert(END, i)
 
     def search(self):
-        if self.var_invoice.get() == "":
+        if self.varInvoice.get() == "":
             messagebox.showerror("Error", "Invoice no. should be required", parent=self.root)
         else:
-            if self.var_invoice.get() in self.blll_list:
-                file_path = os.path.join(BILL_DIR, f"{self.var_invoice.get()}.txt")
-                self.bill_area.delete('1.0', END)
+            if self.varInvoice.get() in self.blllList:
+                filePath = os.path.join(BILL_DIR, f"{self.varInvoice.get()}.txt")
+                self.billArea.delete('1.0', END)
 
-                with open(file_path, 'r') as fp:
+                with open(filePath, 'r') as fp:
                     for i in fp:
-                        self.bill_area.insert(END, i)
+                        self.billArea.insert(END, i)
             else:
                 messagebox.showerror("Error", "Invalid Invoice No.", parent=self.root)
 
     def clear(self):
         self.show()
-        self.bill_area.delete('1.0', END)
+        self.billArea.delete('1.0', END)
 
 
 if __name__ == "__main__":
