@@ -17,10 +17,10 @@ class billClass:
 
         #------------- title --------------
         self.iconTitle=PhotoImage(file="images/logo1.png")
-        title=Label(self.root,text="Inventory Management System",image=self.iconTitle,compound=LEFT,font=("times new roman",40,"bold"),bg="#010c48",fg="white",anchor="w",padx=20).place(x=0,y=0,relwidth=1,height=70)
+        Label(self.root,text="Inventory Management System",image=self.iconTitle,compound=LEFT,font=("times new roman",40,"bold"),bg="#010c48",fg="white",anchor="w",padx=20).place(x=0,y=0,relwidth=1,height=70)
 
         #------------ logout button -----------
-        btnLogout=Button(self.root,text="Logout",font=("times new roman",15,"bold"),bg="yellow",cursor="hand2").place(x=1150,y=10,height=50,width=150)
+        Button(self.root,text="Logout",font=("times new roman",15,"bold"),bg="yellow",cursor="hand2").place(x=1150,y=10,height=50,width=150)
 
         #------------ clock -----------------
         self.lblClock=Label(self.root,text="Welcome to Inventory Management System\t\t Date: DD:MM:YYYY\t\t Time: HH:MM:SS",font=("times new roman",15),bg="#4d636d",fg="white")
@@ -30,19 +30,18 @@ class billClass:
         productFrame1=Frame(self.root,bd=4,relief=RIDGE,bg="white")
         productFrame1.place(x=6,y=110,width=410,height=550)
 
-        pTitle=Label(productFrame1,text="All Products",font=("goudy old style",20,"bold"),bg="#262626",fg="white").pack(side=TOP,fill=X)
+        Label(productFrame1,text="All Products",font=("goudy old style",20,"bold"),bg="#262626",fg="white").pack(side=TOP,fill=X)
 
         self.varSearch=StringVar()
 
         productFrame2=Frame(productFrame1,bd=2,relief=RIDGE,bg="white")
         productFrame2.place(x=2,y=42,width=398,height=90)
 
-        lblSearch=Label(productFrame2,text="Search Product | By Name",font=("times new roman",15,"bold"),bg="white",fg="green").place(x=2,y=5)
-
-        lblSearch=Label(productFrame2,text="Product Name",font=("times new roman",15,"bold"),bg="white").place(x=2,y=45)
-        txtSearch=Entry(productFrame2,textvariable=self.varSearch,font=("times new roman",15),bg="lightyellow").place(x=128,y=47,width=150,height=22)
-        btnSearch=Button(productFrame2,text="Search",command=self.search,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=285,y=45,width=100,height=25)
-        btnShowAll=Button(productFrame2,text="Show All",command=self.show,font=("goudy old style",15),bg="#083531",fg="white",cursor="hand2").place(x=285,y=10,width=100,height=25)
+        Label(productFrame2,text="Search Product | By Name",font=("times new roman",15,"bold"),bg="white",fg="green").place(x=2,y=10)
+        Label(productFrame2,text="Product Name",font=("times new roman",15,"bold"),bg="white").place(x=2,y=45)
+        Entry(productFrame2,textvariable=self.varSearch,font=("times new roman",15),bg="lightyellow").place(x=128,y=47,width=150,height=22)
+        Button(productFrame2,text="Search",command=self.search,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=285,y=45,width=100,height=25)
+        Button(productFrame2,text="Show All",command=self.show,font=("goudy old style",15),bg="#083531",fg="white",cursor="hand2").place(x=285,y=10,width=100,height=25)
 
         productFrame3=Frame(productFrame1,bd=3,relief=RIDGE)
         productFrame3.place(x=2,y=140,width=398,height=375)
@@ -55,22 +54,17 @@ class billClass:
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.productTable.xview)
         scrolly.config(command=self.productTable.yview)
-        self.productTable.heading("pid",text="P ID")
-        self.productTable.heading("name",text="Name")
-        self.productTable.heading("price",text="Price")
-        self.productTable.heading("qty",text="Quantity")
-        self.productTable.heading("status",text="Status")
+        self.setHeadingsAndColumns("product", "pid", "P ID", 40)
+        self.setHeadingsAndColumns("product", "name", "Name", 100)
+        self.setHeadingsAndColumns("product", "price", "Price", 40)
+        self.setHeadingsAndColumns("product", "qty", "Quantity", 60)
+        self.setHeadingsAndColumns("product", "status", "Status", 90)
         self.productTable["show"]="headings"
-        self.productTable.column("pid",width=40)
-        self.productTable.column("name",width=100)
-        self.productTable.column("price",width=100)
-        self.productTable.column("qty",width=40)
-        self.productTable.column("status",width=90)
         self.productTable.pack(fill=BOTH,expand=1)
         self.productTable.bind("<ButtonRelease-1>",self.getData)
         self.show()
 
-        lblNote=Label(productFrame1,text="Note: 'Enter 0 Quantity to remove product from the Cart'",font=("goudy old style",12),anchor="w",bg="white",fg="red").pack(side=BOTTOM,fill=X)
+        Label(productFrame1,text="Note: 'Enter 0 Quantity to remove product from the Cart'",font=("goudy old style",12),anchor="w",bg="white",fg="red").pack(side=BOTTOM,fill=X)
 
         #-------------- customer frame ---------------
         self.varCname=StringVar()
@@ -79,13 +73,13 @@ class billClass:
         customerFrame=Frame(self.root,bd=4,relief=RIDGE,bg="white")
         customerFrame.place(x=420,y=110,width=530,height=70)
 
-        cTitle=Label(customerFrame,text="Customer Details",font=("goudy old style",15),bg="lightgray").pack(side=TOP,fill=X)
+        Label(customerFrame,text="Customer Details",font=("goudy old style",15),bg="lightgray").pack(side=TOP,fill=X)
 
-        lblName=Label(customerFrame,text="Name",font=("times new roman",15),bg="white").place(x=5,y=35)
-        txtName=Entry(customerFrame,textvariable=self.varCname,font=("times new roman",13),bg="lightyellow").place(x=80,y=35,width=180)
+        Label(customerFrame,text="Name",font=("times new roman",15),bg="white").place(x=5,y=35)
+        Entry(customerFrame,textvariable=self.varCname,font=("times new roman",13),bg="lightyellow").place(x=80,y=35,width=180)
 
-        lblContact=Label(customerFrame,text="Contact No.",font=("times new roman",15),bg="white").place(x=270,y=35)
-        txtContact=Entry(customerFrame,textvariable=self.varContact,font=("times new roman",15),bg="lightyellow").place(x=380,y=35,width=140)
+        Label(customerFrame,text="Contact No.",font=("times new roman",15),bg="white").place(x=270,y=35)
+        Entry(customerFrame,textvariable=self.varContact,font=("times new roman",15),bg="lightyellow").place(x=380,y=35,width=140)
 
         calCartFrame=Frame(self.root,bd=2,relief=RIDGE,bg="white")
         calCartFrame.place(x=420,y=190,width=530,height=360)
@@ -99,25 +93,21 @@ class billClass:
         self.txtCalInput=Entry(calFrame,textvariable=self.varCalInput,font=('arial',15,'bold'),width=21,bd=10,relief=GROOVE,state='readonly',justify=RIGHT)
         self.txtCalInput.grid(row=0,columnspan=4)
 
-        btn7=Button(calFrame,text=7,font=('arial',15,'bold'),command=lambda:self.getInput(7),bd=5,width=4,pady=10,cursor="hand2").grid(row=1,column=0)
-        btn8=Button(calFrame,text=8,font=('arial',15,'bold'),command=lambda:self.getInput(8),bd=5,width=4,pady=10,cursor="hand2").grid(row=1,column=1)
-        btn9=Button(calFrame,text=9,font=('arial',15,'bold'),command=lambda:self.getInput(9),bd=5,width=4,pady=10,cursor="hand2").grid(row=1,column=2)
-        btnSum=Button(calFrame,text="+",font=('arial',15,'bold'),command=lambda:self.getInput('+'),bd=5,width=4,pady=10,cursor="hand2").grid(row=1,column=3)
+        calculatorBtns = [[7,8,9,"+"],[4,5,6,"-"],[1,2,3,"*"],[0,"C","=","/"]]
 
-        btn4=Button(calFrame,text=4,font=('arial',15,'bold'),command=lambda:self.getInput(4),bd=5,width=4,pady=10,cursor="hand2").grid(row=2,column=0)
-        btn5=Button(calFrame,text=5,font=('arial',15,'bold'),command=lambda:self.getInput(5),bd=5,width=4,pady=10,cursor="hand2").grid(row=2,column=1)
-        btn6=Button(calFrame,text=6,font=('arial',15,'bold'),command=lambda:self.getInput(6),bd=5,width=4,pady=10,cursor="hand2").grid(row=2,column=2)
-        btnSub=Button(calFrame,text="-",font=('arial',15,'bold'),command=lambda:self.getInput('-'),bd=5,width=4,pady=10,cursor="hand2").grid(row=2,column=3)
-
-        btn1=Button(calFrame,text=1,font=('arial',15,'bold'),command=lambda:self.getInput(1),bd=5,width=4,pady=10,cursor="hand2").grid(row=3,column=0)
-        btn2=Button(calFrame,text=2,font=('arial',15,'bold'),command=lambda:self.getInput(2),bd=5,width=4,pady=10,cursor="hand2").grid(row=3,column=1)
-        btn3=Button(calFrame,text=3,font=('arial',15,'bold'),command=lambda:self.getInput(3),bd=5,width=4,pady=10,cursor="hand2").grid(row=3,column=2)
-        btnMul=Button(calFrame,text="*",font=('arial',15,'bold'),command=lambda:self.getInput('*'),bd=5,width=4,pady=10,cursor="hand2").grid(row=3,column=3)
-
-        btn0=Button(calFrame,text=0,font=('arial',15,'bold'),command=lambda:self.getInput(0),bd=5,width=4,pady=15,cursor="hand2").grid(row=4,column=0)
-        btnC=Button(calFrame,text="C",font=('arial',15,'bold'),command=self.clearCal,bd=5,width=4,pady=15,cursor="hand2").grid(row=4,column=1)
-        btnEq=Button(calFrame,text="=",font=('arial',15,'bold'),command=self.performCal,bd=5,width=4,pady=15,cursor="hand2").grid(row=4,column=2)
-        btnDiv=Button(calFrame,text="/",font=('arial',15,'bold'),command=lambda:self.getInput('/'),bd=5,width=4,pady=15,cursor="hand2").grid(row=4,column=3)
+        y = 10
+        for row in range(4):
+            for col in range(4):
+                btn = calculatorBtns[row][col]
+                if row == 3:
+                    y = 15
+                if btn == "=":
+                    command = self.performCal
+                elif btn == "C":
+                    command = self.clearCal
+                else:
+                    command = lambda b=btn:self.getInput(b)
+                Button(calFrame,text=btn,font=('arial',15,'bold'),command=command,bd=5,width=4,pady=y,cursor="hand2").grid(row=row+1,column=col)
 
         #------------------ cart frame --------------------
         cartFrame=Frame(calCartFrame,bd=3,relief=RIDGE)
@@ -133,15 +123,12 @@ class billClass:
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.cartTable.xview)
         scrolly.config(command=self.cartTable.yview)
-        self.cartTable.heading("pid",text="P ID")
-        self.cartTable.heading("name",text="Name")
-        self.cartTable.heading("price",text="Price")
-        self.cartTable.heading("qty",text="Quantity")
+
+        self.setHeadingsAndColumns("cart", "pid", "P ID", 40)
+        self.setHeadingsAndColumns("cart", "name", "Name", 100)
+        self.setHeadingsAndColumns("cart", "price", "Price", 90)
+        self.setHeadingsAndColumns("cart", "qty", "Quantity", 30)
         self.cartTable["show"]="headings"
-        self.cartTable.column("pid",width=40)
-        self.cartTable.column("name",width=100)
-        self.cartTable.column("price",width=90)
-        self.cartTable.column("qty",width=30)
         self.cartTable.pack(fill=BOTH,expand=1)
         self.cartTable.bind("<ButtonRelease-1>",self.getDataCart)
 
@@ -155,26 +142,21 @@ class billClass:
         addCartWidgetsFrame=Frame(self.root,bd=2,relief=RIDGE,bg="white")
         addCartWidgetsFrame.place(x=420,y=550,width=530,height=110)
 
-        lblPName=Label(addCartWidgetsFrame,text="Product Name",font=("times new roman",15),bg="white").place(x=5,y=5)
-        txtPName=Entry(addCartWidgetsFrame,textvariable=self.varPname,font=("times new roman",15),bg="lightyellow",state='readonly').place(x=5,y=35,width=190,height=22)
-
-        lblPPrice=Label(addCartWidgetsFrame,text="Price Per Qty",font=("times new roman",15),bg="white").place(x=230,y=5)
-        txtPPrice=Entry(addCartWidgetsFrame,textvariable=self.varPrice,font=("times new roman",15),bg="lightyellow",state='readonly').place(x=230,y=35,width=150,height=22)
-
-        lblPQty=Label(addCartWidgetsFrame,text="Quantity",font=("times new roman",15),bg="white").place(x=390,y=5)
-        txtPQty=Entry(addCartWidgetsFrame,textvariable=self.varQty,font=("times new roman",15),bg="lightyellow").place(x=390,y=35,width=120,height=22)
+        self.addLabelAndEntry(addCartWidgetsFrame,"Product Name",self.varPname,5,190,'readonly')
+        self.addLabelAndEntry(addCartWidgetsFrame,"Price Per Qty",self.varPrice,230,150,'readonly')
+        self.addLabelAndEntry(addCartWidgetsFrame,"Quantity",self.varQty,390,120)
 
         self.lblInStock=Label(addCartWidgetsFrame,text="In Stock",font=("times new roman",15),bg="white")
         self.lblInStock.place(x=5,y=70)
 
-        btnClearCart=Button(addCartWidgetsFrame,command=self.clearCart,text="Clear",font=("times new roman",15,"bold"),bg="lightgray",cursor="hand2").place(x=180,y=70,width=150,height=30)
-        btnAddCart=Button(addCartWidgetsFrame,command=self.addUpdateCart,text="Add | Update",font=("times new roman",15,"bold"),bg="orange",cursor="hand2").place(x=340,y=70,width=180,height=30)
+        Button(addCartWidgetsFrame,command=self.clearCart,text="Clear",font=("times new roman",15,"bold"),bg="lightgray",cursor="hand2").place(x=180,y=70,width=150,height=30)
+        Button(addCartWidgetsFrame,command=self.addUpdateCart,text="Add | Update",font=("times new roman",15,"bold"),bg="orange",cursor="hand2").place(x=340,y=70,width=180,height=30)
 
         #------------------- billing area -------------------
         billFrame=Frame(self.root,bd=2,relief=RIDGE,bg="white")
         billFrame.place(x=953,y=110,width=400,height=410)
 
-        bTitle=Label(billFrame,text="Customer Bill Area",font=("goudy old style",20,"bold"),bg="#262626",fg="white").pack(side=TOP,fill=X)
+        Label(billFrame,text="Customer Bill Area",font=("goudy old style",20,"bold"),bg="#262626",fg="white").pack(side=TOP,fill=X)
         scrolly=Scrollbar(billFrame,orient=VERTICAL)
         scrolly.pack(side=RIGHT,fill=Y)
 
@@ -208,6 +190,19 @@ class billClass:
         #self.billTop()
         self.updateDateTime()
 #---------------------- all functions ------------------------------
+    def setHeadingsAndColumns(self, type, id, text, width):
+        if type=="product":
+            self.productTable.heading(id, text=text)
+            self.productTable.column(id, width=width)
+        elif type=="cart":
+            self.cartTable.heading(id, text=text)
+            self.cartTable.column(id, width=width)
+
+    def addLabelAndEntry(self, parent, labelText, textVar, x, width, state='normal'):
+        Label(parent,text=labelText,font=("times new roman",15),bg="white").place(x=x,y=5)
+        Entry(parent,textvariable=textVar,font=("times new roman",15),bg="lightyellow",state=state).place(x=x,y=35,width=width,height=22)
+
+
     def getInput(self,num):
         xnum=self.varCalInput.get()+str(num)
         self.varCalInput.set(xnum)
@@ -304,7 +299,6 @@ class billClass:
     def billUpdate(self):
         self.billAmnt=0
         self.netPay=0
-        self.siscount=0
         for row in self.cartList:
             self.billAmnt=self.billAmnt+(float(row[2])*int(row[3]))
         self.discount=(self.billAmnt*5)/100
@@ -327,11 +321,8 @@ class billClass:
         elif len(self.cartList)==0:
             messagebox.showerror("Error",f"Please Add product to the Cart!!!",parent=self.root)
         else:
-            #--------- bill top -----------------
             self.billTop()
-            #--------- bill middle --------------
             self.billMiddle()
-            #--------- bill bottom --------------
             self.billBottom()
 
             fp=open(f'bill/{str(self.invoice)}.txt','w')

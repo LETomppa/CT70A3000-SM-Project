@@ -34,6 +34,8 @@ This module is for managing suppliers. The module lets the user search for a sup
 
 Changed variable and function naming convention to use lowerCamelCase so that it is consistent across all python files
 
+Removed unused variables from dashboard and billing
+
 1. dashboard.py
 - Simplified button creation for sidebar to use a for loop
 - Simplified content creation in dashboard to be in the same for loop
@@ -41,3 +43,8 @@ Changed variable and function naming convention to use lowerCamelCase so that it
 - Simplified updateContent function to use for loop
 
 2. billing.py
+- Simplified button creation to use for loop so there isnt code duplication
+- Added function setHeadingsAndColumns
+- Added function addLabelAndEntry
+- Removed useless self.siscount as it didnt do anything
+- Removed useless comments for billTop, billMiddle, and billBottom
