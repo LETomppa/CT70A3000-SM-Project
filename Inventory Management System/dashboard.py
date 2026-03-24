@@ -10,6 +10,7 @@ from supplier import supplierClass
 from category import categoryClass
 from product import productClass
 from sales import salesClass
+from billing import billClass
 
 from helpers import font
 
@@ -103,6 +104,14 @@ class IMS:
                 )
                 self.__dict__[item["labelName"]].place(x=item["x"], y=item["y"], height=150, width=300)
 
+        # ------------ open billing -----------------
+        Button(
+            self.root, text="Open Billing",
+            command=lambda: self.openModule("billing"),
+            font=(font, 15, "bold"),
+            bg="#00FF0D", fg="white", cursor="hand2"
+        ).place(x=1100, y=620, width=200, height=50)
+
         # ------------ footer -----------------
         Label(
             self.root,
@@ -126,6 +135,8 @@ class IMS:
             self.app = productClass(self.newWin)
         elif id == "sales":
             self.app = salesClass(self.newWin)
+        elif id == "billing":
+            self.app = billClass(self.newWin)
         elif id == "exit":
             self.root.destroy()
 

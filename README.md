@@ -62,3 +62,8 @@ This module is for managing suppliers. The module lets the user search for a sup
 
 5. sales.py 
 - Fixed the typo in the variable billList (was blllList)
+
+# T3. Adding New Features
+The hypothetical stakeholders have said that they want to open the billing module from the dashboard itself. This has now been implemented as a button on the bottom right. 
+
+# T4. Testing and Test Coverage
