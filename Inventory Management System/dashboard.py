@@ -11,6 +11,8 @@ from category import categoryClass
 from product import productClass
 from sales import salesClass
 
+from helpers import font
+
 # ------------------ BASE PATH SETUP ------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 IMAGE_DIR = os.path.join(BASE_DIR, "images")
@@ -33,7 +35,7 @@ class IMS:
             text="Inventory Management System",
             image=self.iconTitle,
             compound=LEFT,
-            font=("times new roman", 40, "bold"),
+            font=(font, 40, "bold"),
             bg="#010c48",
             fg="white",
             anchor="w",
@@ -43,7 +45,7 @@ class IMS:
         # ------------ logout button -----------
         Button(
             self.root, text="Logout",
-            font=("times new roman", 15, "bold"),
+            font=(font, 15, "bold"),
             bg="yellow", cursor="hand2"
         ).place(x=1150, y=10, height=50, width=150)
 
@@ -51,7 +53,7 @@ class IMS:
         self.lblClock = Label(
             self.root,
             text="Welcome to Inventory Management System\t\t Date: DD:MM:YYYY\t\t Time: HH:MM:SS",
-            font=("times new roman", 15),
+            font=(font, 15),
             bg="#4d636d", fg="white"
         )
         self.lblClock.place(x=0, y=70, relwidth=1, height=30)
@@ -69,7 +71,7 @@ class IMS:
 
         Label(
             leftMenu, text="Menu",
-            font=("times new roman", 20),
+            font=(font, 20),
             bg="#009688"
         ).pack(side=TOP, fill=X)
 
@@ -88,7 +90,7 @@ class IMS:
                 leftMenu, text=item["name"], command=lambda id=item["id"]: self.openModule(id),
                 image=self.iconSide, compound=LEFT,
                 padx=5, anchor="w",
-                font=("times new roman", 20, "bold"),
+                font=(font, 20, "bold"),
                 bg="white", bd=3, cursor="hand2"
             ).pack(side=TOP, fill=X)        
             
@@ -97,7 +99,7 @@ class IMS:
                 self.__dict__[item["labelName"]] = Label(
                     self.root, text=f"Total {item['name']}\n{{ 0 }}",
                     bd=5, relief=RIDGE, bg=item["color"],
-                    fg="white", font=("goudy old style", 20, "bold")
+                    fg="white", font=(font, 20, "bold")
                 )
                 self.__dict__[item["labelName"]].place(x=item["x"], y=item["y"], height=150, width=300)
 
@@ -105,7 +107,7 @@ class IMS:
         Label(
             self.root,
             text="IMS-Inventory Management System",
-            font=("times new roman", 12),
+            font=(font, 12),
             bg="#4d636d", fg="white"
         ).pack(side=BOTTOM, fill=X)
 

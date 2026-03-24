@@ -2,6 +2,7 @@ from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
+from helpers import setHeadingsAndColumns, addLabelAndEntry, font
 
 class productClass:
     def __init__(self,root):
@@ -29,48 +30,45 @@ class productClass:
         productFrame.place(x=10,y=10,width=450,height=480)
 
         #------------ title --------------
-        Label(productFrame,text="Manage Product Details",font=("goudy old style",18),bg="#0f4d7d",fg="white").pack(side=TOP,fill=X)
+        Label(productFrame,text="Manage Product Details",font=(font,18),bg="#0f4d7d",fg="white").pack(side=TOP,fill=X)
 
-        Label(productFrame,text="Category",font=("goudy old style",18),bg="white").place(x=30,y=60)
-        Label(productFrame,text="Supplier",font=("goudy old style",18),bg="white").place(x=30,y=110)
-        Label(productFrame,text="Name",font=("goudy old style",18),bg="white").place(x=30,y=160)
-        Label(productFrame,text="Price",font=("goudy old style",18),bg="white").place(x=30,y=210)
-        Label(productFrame,text="Quantity",font=("goudy old style",18),bg="white").place(x=30,y=260)
-        Label(productFrame,text="Status",font=("goudy old style",18),bg="white").place(x=30,y=310)
+        Label(productFrame,text="Category",font=(font,18),bg="white").place(x=30,y=60)
+        Label(productFrame,text="Supplier",font=(font,18),bg="white").place(x=30,y=110)
+        Label(productFrame,text="Status",font=(font,18),bg="white").place(x=30,y=310)
 
-        cmbCat=ttk.Combobox(productFrame,textvariable=self.varCat,values=self.catList,state='readonly',justify=CENTER,font=("goudy old style",15))
+        cmbCat=ttk.Combobox(productFrame,textvariable=self.varCat,values=self.catList,state='readonly',justify=CENTER,font=(font,15))
         cmbCat.place(x=150,y=60,width=200)
         cmbCat.current(0)
 
-        cmbSup=ttk.Combobox(productFrame,textvariable=self.varSup,values=self.supList,state='readonly',justify=CENTER,font=("goudy old style",15))
+        cmbSup=ttk.Combobox(productFrame,textvariable=self.varSup,values=self.supList,state='readonly',justify=CENTER,font=(font,15))
         cmbSup.place(x=150,y=110,width=200)
         cmbSup.current(0)
 
-        Entry(productFrame,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=150,y=160,width=200)
-        Entry(productFrame,textvariable=self.varPrice,font=("goudy old style",15),bg="lightyellow").place(x=150,y=210,width=200)
-        Entry(productFrame,textvariable=self.varQty,font=("goudy old style",15),bg="lightyellow").place(x=150,y=260,width=200)
+        addLabelAndEntry(self, productFrame, "Name", self.varName, 30, 160, 150, 160, 200)
+        addLabelAndEntry(self, productFrame, "Price", self.varPrice, 30, 210, 150, 210, 200)
+        addLabelAndEntry(self, productFrame, "Quantity", self.varQty, 30, 260, 150, 260, 200)
 
-        cmbStatus=ttk.Combobox(productFrame,textvariable=self.varStatus,values=("Active","Inactive"),state='readonly',justify=CENTER,font=("goudy old style",15))
+        cmbStatus=ttk.Combobox(productFrame,textvariable=self.varStatus,values=("Active","Inactive"),state='readonly',justify=CENTER,font=(font,15))
         cmbStatus.place(x=150,y=310,width=200)
         cmbStatus.current(0)
 
         #-------------- buttons -----------------
-        Button(productFrame,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=10,y=400,width=100,height=40)
-        Button(productFrame,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=120,y=400,width=100,height=40)
-        Button(productFrame,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=230,y=400,width=100,height=40)
-        Button(productFrame,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=340,y=400,width=100,height=40)
+        Button(productFrame,text="Save",command=self.add,font=(font,15),bg="#2196f3",fg="white",cursor="hand2").place(x=10,y=400,width=100,height=40)
+        Button(productFrame,text="Update",command=self.update,font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=120,y=400,width=100,height=40)
+        Button(productFrame,text="Delete",command=self.delete,font=(font,15),bg="#f44336",fg="white",cursor="hand2").place(x=230,y=400,width=100,height=40)
+        Button(productFrame,text="Clear",command=self.clear,font=(font,15),bg="#607d8b",fg="white",cursor="hand2").place(x=340,y=400,width=100,height=40)
 
         #---------- Search Frame -------------
-        searchFrame=LabelFrame(self.root,text="Search Product",font=("goudy old style",12,"bold"),bd=2,relief=RIDGE,bg="white")
+        searchFrame=LabelFrame(self.root,text="Search Product",font=(font,12,"bold"),bd=2,relief=RIDGE,bg="white")
         searchFrame.place(x=480,y=10,width=600,height=80)
 
         #------------ options ----------------
-        cmbSearch=ttk.Combobox(searchFrame,textvariable=self.varSearchby,values=("Select","Category","Supplier","Name"),state='readonly',justify=CENTER,font=("goudy old style",15))
+        cmbSearch=ttk.Combobox(searchFrame,textvariable=self.varSearchby,values=("Select","Category","Supplier","Name"),state='readonly',justify=CENTER,font=(font,15))
         cmbSearch.place(x=10,y=10,width=180)
         cmbSearch.current(0)
 
-        Entry(searchFrame,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=200,y=10)
-        Button(searchFrame,text="Search",command=self.search,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
+        Entry(searchFrame,textvariable=self.varSearchtxt,font=(font,15),bg="lightyellow").place(x=200,y=10)
+        Button(searchFrame,text="Search",command=self.search,font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
 
         #------------ product details -------------
         productListFrame=Frame(self.root,bd=3,relief=RIDGE)
@@ -84,21 +82,15 @@ class productClass:
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.productTable.xview)
         scrolly.config(command=self.productTable.yview)
-        self.productTable.heading("pid",text="P ID")
-        self.productTable.heading("Category",text="Category")
-        self.productTable.heading("Supplier",text="Suppler")
-        self.productTable.heading("name",text="Name")
-        self.productTable.heading("price",text="Price")
-        self.productTable.heading("qty",text="Quantity")
-        self.productTable.heading("status",text="Status")
+        setHeadingsAndColumns(self.productTable, "pid", "P ID", 90)
+        setHeadingsAndColumns(self.productTable, "Category", "Category", 100)
+        setHeadingsAndColumns(self.productTable, "Supplier", "Supplier", 100)
+        setHeadingsAndColumns(self.productTable, "name", "Name", 100)
+        setHeadingsAndColumns(self.productTable, "price", "Price", 100)
+        setHeadingsAndColumns(self.productTable, "qty", "Quantity", 100)
+        setHeadingsAndColumns(self.productTable, "status", "Status", 100)
+
         self.productTable["show"]="headings"
-        self.productTable.column("pid",width=90)
-        self.productTable.column("Category",width=100)
-        self.productTable.column("Supplier",width=100)
-        self.productTable.column("name",width=100)
-        self.productTable.column("price",width=100)
-        self.productTable.column("qty",width=100)
-        self.productTable.column("status",width=100)
 
         self.productTable.pack(fill=BOTH,expand=1)
         self.productTable.bind("<ButtonRelease-1>",self.getData)

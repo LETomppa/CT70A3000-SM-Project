@@ -2,6 +2,11 @@ from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
+from helpers import setHeadingsAndColumns, font
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+IMAGE_DIR = os.path.join(BASE_DIR, "images")
 
 class categoryClass:
     def __init__(self,root):
@@ -15,13 +20,13 @@ class categoryClass:
         self.varCatId=StringVar()
         self.varName=StringVar()
         #--------------- title ---------------------
-        Label(self.root,text="Manage Product Category",font=("goudy old style",30),bg="#184a45",fg="white",bd=3,relief=RIDGE).pack(side=TOP,fill=X,padx=10,pady=20)
+        Label(self.root,text="Manage Product Category",font=(font,30),bg="#184a45",fg="white",bd=3,relief=RIDGE).pack(side=TOP,fill=X,padx=10,pady=20)
 
-        Label(self.root,text="Enter Category Name",font=("goudy old style",30),bg="white").place(x=50,y=100)
-        Entry(self.root,textvariable=self.varName,bg="lightyellow",font=("goudy old style",18)).place(x=50,y=170,width=300)
+        Label(self.root,text="Enter Category Name",font=(font,30),bg="white").place(x=50,y=100)
+        Entry(self.root,textvariable=self.varName,bg="lightyellow",font=(font,18)).place(x=50,y=170,width=300)
 
-        Button(self.root,text="ADD",command=self.add,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=360,y=170,width=150,height=30)
-        Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="red",fg="white",cursor="hand2").place(x=520,y=170,width=150,height=30)
+        Button(self.root,text="ADD",command=self.add,font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=360,y=170,width=150,height=30)
+        Button(self.root,text="Delete",command=self.delete,font=(font,15),bg="red",fg="white",cursor="hand2").place(x=520,y=170,width=150,height=30)
 
         #------------ category details -------------
         catFrame=Frame(self.root,bd=3,relief=RIDGE)
@@ -35,19 +40,18 @@ class categoryClass:
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.categoryTable.xview)
         scrolly.config(command=self.categoryTable.yview)
-        self.categoryTable.heading("cid",text="C ID")
-        self.categoryTable.heading("name",text="Name")
+
+        setHeadingsAndColumns(self.categoryTable, "cid", "C ID", 90)
+        setHeadingsAndColumns(self.categoryTable, "name", "Name", 100)
         self.categoryTable["show"]="headings"
-        self.categoryTable.column("cid",width=90)
-        self.categoryTable.column("name",width=100)
 
         self.categoryTable.pack(fill=BOTH,expand=1)
         self.categoryTable.bind("<ButtonRelease-1>",self.getData)
         self.show()
 
         #----------------- images ---------------------
-        self.addImage("images/cat.jpg", 50, 220)
-        self.addImage("images/category.jpg", 580, 220)
+        self.addImage(os.path.join(IMAGE_DIR, "cat.jpg"), 50, 220)
+        self.addImage(os.path.join(IMAGE_DIR, "category.jpg"), 580, 220)
 #----------------------------------------------------------------------------------
 
     def addImage(self, path, x, y):

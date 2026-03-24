@@ -2,6 +2,7 @@ from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
+from helpers import setHeadingsAndColumns, font
 
 class employeeClass:
     def __init__(self,root):
@@ -27,65 +28,70 @@ class employeeClass:
         self.varSalary=StringVar()
 
         #---------- Search Frame -------------
-        searchFrame=LabelFrame(self.root,text="Search Employee",font=("goudy old style",12,"bold"),bd=2,relief=RIDGE,bg="white")
+        searchFrame=LabelFrame(self.root,text="Search Employee",font=(font,12,"bold"),bd=2,relief=RIDGE,bg="white")
         searchFrame.place(x=250,y=20,width=600,height=70)
 
         #------------ options ----------------
-        cmbSearch=ttk.Combobox(searchFrame,textvariable=self.varSearchby,values=("Select","Email","Name","Contact"),state='readonly',justify=CENTER,font=("goudy old style",15))
+        cmbSearch=ttk.Combobox(searchFrame,textvariable=self.varSearchby,values=("Select","Email","Name","Contact"),state='readonly',justify=CENTER,font=(font,15))
         cmbSearch.place(x=10,y=10,width=180)
         cmbSearch.current(0)
 
-        Entry(searchFrame,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=200,y=10)
-        Button(searchFrame,command=self.search,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
+        Entry(searchFrame,textvariable=self.varSearchtxt,font=(font,15),bg="lightyellow").place(x=200,y=10)
+        Button(searchFrame,command=self.search,text="Search",font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
 
         #-------------- title ---------------
-        Label(self.root,text="Employee Details",font=("goudy old style",15),bg="#0f4d7d",fg="white").place(x=50,y=100,width=1000)
+        Label(self.root,text="Employee Details",font=(font,15),bg="#0f4d7d",fg="white").place(x=50,y=100,width=1000)
 
         #-------------- content ---------------
-        #---------- row 1 ----------------
-        Label(self.root,text="Emp ID",font=("goudy old style",15),bg="white").place(x=50,y=150)
-        Label(self.root,text="Gender",font=("goudy old style",15),bg="white").place(x=350,y=150)
-        Label(self.root,text="Contact",font=("goudy old style",15),bg="white").place(x=750,y=150)
+        
+        #---------- label creation ----------------
+        labels = [{"label": "Emp ID", "x": 50, "y": 150},
+                  {"label": "Gender", "x": 350, "y": 150},
+                  {"label": "Contact", "x": 750, "y": 150},
+                  {"label": "Name", "x": 50, "y": 190},
+                  {"label": "D.O.B.", "x": 350, "y": 190},
+                  {"label": "D.O.J.", "x": 750, "y": 190},
+                  {"label": "Email", "x": 50, "y": 230},
+                  {"label": "Password", "x": 350, "y": 230},
+                  {"label": "User Type", "x": 750, "y": 230},
+                  {"label": "Address", "x": 50, "y": 270},
+                  {"label": "Salary", "x": 500, "y": 270}]
 
-        Entry(self.root,textvariable=self.varEmpId,font=("goudy old style",15),bg="lightyellow").place(x=150,y=150,width=180)
-        cmbGender=ttk.Combobox(self.root,textvariable=self.varGender,values=("Select","Male","Female","Other"),state='readonly',justify=CENTER,font=("goudy old style",15))
-        cmbGender.place(x=500,y=150,width=180)
-        cmbGender.current(0)
-        Entry(self.root,textvariable=self.varContact,font=("goudy old style",15),bg="lightyellow").place(x=850,y=150,width=180)
+        for label in labels:
+            Label(self.root, text=label["label"], font=(font, 15), bg="white").place(x=label["x"], y=label["y"])
 
-        #---------- row 2 ----------------
-        Label(self.root,text="Name",font=("goudy old style",15),bg="white").place(x=50,y=190)
-        Label(self.root,text="D.O.B.",font=("goudy old style",15),bg="white").place(x=350,y=190)
-        Label(self.root,text="D.O.J.",font=("goudy old style",15),bg="white").place(x=750,y=190)
 
-        Entry(self.root,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=150,y=190,width=180)
-        Entry(self.root,textvariable=self.varDob,font=("goudy old style",15),bg="lightyellow").place(x=500,y=190,width=180)
-        Entry(self.root,textvariable=self.varDoj,font=("goudy old style",15),bg="lightyellow").place(x=850,y=190,width=180)
+        entries = [{"variable": self.varEmpId, "x": 150, "y": 150},
+                   {"variable": self.varGender, "x": 500, "y": 150},
+                   {"variable": self.varContact, "x": 850, "y": 150},
+                   {"variable": self.varName, "x": 150, "y": 190},
+                   {"variable": self.varDob, "x": 500, "y": 190},
+                   {"variable": self.varDoj, "x": 850, "y": 190},
+                   {"variable": self.varEmail, "x": 150, "y": 230},
+                   {"variable": self.varPass, "x": 500, "y": 230},
+                   {"variable": self.varUtype, "x": 850, "y": 230},
+                   {"variable": self.varSalary, "x": 600, "y": 270}]
+        
+        for entry in entries:
+            if entry["variable"] in [self.varGender, self.varUtype]:
+                cmb = ttk.Combobox(self.root, textvariable=entry["variable"], state='readonly', justify=CENTER, font=(font, 15))
+                if entry["variable"] == self.varGender:
+                    cmb['values'] = ("Select", "Male", "Female", "Other")
+                else:
+                    cmb['values'] = ("Admin", "Employee")
+                cmb.place(x=entry["x"], y=entry["y"], width=180)
+                cmb.current(0)
+            else:
+                Entry(self.root, textvariable=entry["variable"], font=(font, 15), bg="lightyellow").place(x=entry["x"], y=entry["y"], width=180)
 
-        #---------- row 3 ----------------
-        Label(self.root,text="Email",font=("goudy old style",15),bg="white").place(x=50,y=230)
-        Label(self.root,text="Password",font=("goudy old style",15),bg="white").place(x=350,y=230)
-        Label(self.root,text="User Type",font=("goudy old style",15),bg="white").place(x=750,y=230)
-
-        Entry(self.root,textvariable=self.varEmail,font=("goudy old style",15),bg="lightyellow").place(x=150,y=230,width=180)
-        Entry(self.root,textvariable=self.varPass,font=("goudy old style",15),bg="lightyellow").place(x=500,y=230,width=180)
-        cmbUtype=ttk.Combobox(self.root,textvariable=self.varUtype,values=("Admin","Employee"),state='readonly',justify=CENTER,font=("goudy old style",15))
-        cmbUtype.place(x=850,y=230,width=180)
-        cmbUtype.current(0)
-
-        #---------- row 4 ----------------
-        Label(self.root,text="Address",font=("goudy old style",15),bg="white").place(x=50,y=270)
-        Label(self.root,text="Salary",font=("goudy old style",15),bg="white").place(x=500,y=270)
-
-        self.txtAddress=Text(self.root,font=("goudy old style",15),bg="lightyellow")
-        self.txtAddress.place(x=150,y=270,width=300,height=60)
-        Entry(self.root,textvariable=self.varSalary,font=("goudy old style",15),bg="lightyellow").place(x=600,y=270,width=180)
+        self.txtAddress = Text(self.root, font=(font, 15), bg="lightyellow")
+        self.txtAddress.place(x=150, y=270, width=300, height=60)
 
         #-------------- buttons -----------------
-        Button(self.root,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=500,y=305,width=110,height=28)
-        Button(self.root,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=620,y=305,width=110,height=28)
-        Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=740,y=305,width=110,height=28)
-        Button(self.root,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=860,y=305,width=110,height=28)
+        Button(self.root,text="Save",command=self.add,font=(font,15),bg="#2196f3",fg="white",cursor="hand2").place(x=500,y=305,width=110,height=28)
+        Button(self.root,text="Update",command=self.update,font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=620,y=305,width=110,height=28)
+        Button(self.root,text="Delete",command=self.delete,font=(font,15),bg="#f44336",fg="white",cursor="hand2").place(x=740,y=305,width=110,height=28)
+        Button(self.root,text="Clear",command=self.clear,font=(font,15),bg="#607d8b",fg="white",cursor="hand2").place(x=860,y=305,width=110,height=28)
 
         #------------ employee details -------------
         empFrame=Frame(self.root,bd=3,relief=RIDGE)
@@ -99,29 +105,18 @@ class employeeClass:
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.employeeTable.xview)
         scrolly.config(command=self.employeeTable.yview)
-        self.employeeTable.heading("eid",text="EMP ID")
-        self.employeeTable.heading("name",text="Name")
-        self.employeeTable.heading("email",text="Email")
-        self.employeeTable.heading("gender",text="Gender")
-        self.employeeTable.heading("contact",text="Contact")
-        self.employeeTable.heading("dob",text="D.O.B")
-        self.employeeTable.heading("doj",text="D.O.J")
-        self.employeeTable.heading("pass",text="Password")
-        self.employeeTable.heading("utype",text="User Type")
-        self.employeeTable.heading("address",text="Address")
-        self.employeeTable.heading("salary",text="Salary")
+        setHeadingsAndColumns(self.employeeTable, "eid", "EMP ID", 90)
+        setHeadingsAndColumns(self.employeeTable, "name", "Name", 100)
+        setHeadingsAndColumns(self.employeeTable, "email", "Email", 100)
+        setHeadingsAndColumns(self.employeeTable, "gender", "Gender", 100)
+        setHeadingsAndColumns(self.employeeTable, "contact", "Contact", 100)
+        setHeadingsAndColumns(self.employeeTable, "dob", "D.O.B", 100)
+        setHeadingsAndColumns(self.employeeTable, "doj", "D.O.J", 100)
+        setHeadingsAndColumns(self.employeeTable, "pass", "Password", 100)
+        setHeadingsAndColumns(self.employeeTable, "utype", "User Type", 100)
+        setHeadingsAndColumns(self.employeeTable, "address", "Address", 100)
+        setHeadingsAndColumns(self.employeeTable, "salary", "Salary", 100)
         self.employeeTable["show"]="headings"
-        self.employeeTable.column("eid",width=90)
-        self.employeeTable.column("name",width=100)
-        self.employeeTable.column("email",width=100)
-        self.employeeTable.column("gender",width=100)
-        self.employeeTable.column("contact",width=100)
-        self.employeeTable.column("dob",width=100)
-        self.employeeTable.column("doj",width=100)
-        self.employeeTable.column("pass",width=100)
-        self.employeeTable.column("utype",width=100)
-        self.employeeTable.column("address",width=100)
-        self.employeeTable.column("salary",width=100)
 
         self.employeeTable.pack(fill=BOTH,expand=1)
         self.employeeTable.bind("<ButtonRelease-1>",self.getData)

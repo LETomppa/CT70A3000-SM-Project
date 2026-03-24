@@ -34,6 +34,9 @@ This module is for managing suppliers. The module lets the user search for a sup
 
 - Changed variable and function naming convention to use lowerCamelCase so that it is consistent across all python files
 - Removed unused variables
+- Created helpers.py that has helper functions that can be reused for labeling for example
+- Added helper function setHeadingsAndColumns and addLabelAndEntry
+- Added global font variable in helpers.py
 
 1. dashboard.py
 - Simplified button creation for sidebar to use a for loop
@@ -43,7 +46,6 @@ This module is for managing suppliers. The module lets the user search for a sup
 
 2. billing.py
 - Simplified button creation to use for loop so there isnt code duplication
-- Added function setHeadingsAndColumns
 - Added function addLabelAndEntry
 - Removed useless self.siscount as it didnt do anything
 - Removed useless comments for billTop, billMiddle, and billBottom
@@ -53,4 +55,6 @@ This module is for managing suppliers. The module lets the user search for a sup
 - Created addImage function to reduce code duplication
 - Removed unused variable in getData
 
-4. employee.py
+4. employee.py, product.py, supplier.py
+- Cleaned up label and entry creation
+- Cleaned up heading and column creation

@@ -3,6 +3,8 @@ from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
 
+from helpers import setHeadingsAndColumns, addLabelAndEntry, font
+
 class supplierClass:
     def __init__(self,root):
         self.root=root
@@ -20,38 +22,30 @@ class supplierClass:
 
 
         #---------- Search Frame -------------
-        lblSearch=Label(self.root,text="Invoice No.",bg="white",font=("goudy old style",15))
+        lblSearch=Label(self.root,text="Invoice No.",bg="white",font=(font,15))
         lblSearch.place(x=700,y=80)
 
-        Entry(self.root,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=850,y=80,width=160)
-        Button(self.root,command=self.search,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=980,y=79,width=100,height=28)
+        Entry(self.root,textvariable=self.varSearchtxt,font=(font,15),bg="lightyellow").place(x=850,y=80,width=160)
+        Button(self.root,command=self.search,text="Search",font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=980,y=79,width=100,height=28)
 
         #-------------- title ---------------
-        Label(self.root,text="Supplier Details",font=("goudy old style",20,"bold"),bg="#0f4d7d",fg="white").place(x=50,y=10,width=1000,height=40)
+        Label(self.root,text="Supplier Details",font=(font,20,"bold"),bg="#0f4d7d",fg="white").place(x=50,y=10,width=1000,height=40)
 
         #-------------- content ---------------
-        #---------- row 1 ----------------
-        Label(self.root,text="Invoice No.",font=("goudy old style",15),bg="white").place(x=50,y=80)
-        Entry(self.root,textvariable=self.varSupInvoice,font=("goudy old style",15),bg="lightyellow").place(x=180,y=80,width=180)
-
-        #---------- row 2 ----------------
-        Label(self.root,text="Name",font=("goudy old style",15),bg="white").place(x=50,y=120)
-        Entry(self.root,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=180,y=120,width=180)
-
-        #---------- row 3 ----------------
-        Label(self.root,text="Contact",font=("goudy old style",15),bg="white").place(x=50,y=160)
-        Entry(self.root,textvariable=self.varContact,font=("goudy old style",15),bg="lightyellow").place(x=180,y=160,width=180)
+        addLabelAndEntry(self, self.root, "Invoice No.", self.varSupInvoice, 50, 80, 180, 80, 180)
+        addLabelAndEntry(self, self.root, "Name", self.varName, 50, 120, 180, 120, 180)
+        addLabelAndEntry(self, self.root, "Contact", self.varContact, 50, 160, 180, 160, 180)
 
         #---------- row 4 ----------------
-        Label(self.root,text="Description",font=("goudy old style",15),bg="white").place(x=50,y=200)
-        self.txtDesc=Text(self.root,font=("goudy old style",15),bg="lightyellow")
+        Label(self.root,text="Description",font=(font,15),bg="white").place(x=50,y=200)
+        self.txtDesc=Text(self.root,font=(font,15),bg="lightyellow")
         self.txtDesc.place(x=180,y=200,width=470,height=120)
 
         #-------------- buttons -----------------
-        Button(self.root,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=180,y=370,width=110,height=35)
-        Button(self.root,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=300,y=370,width=110,height=35)
-        Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=420,y=370,width=110,height=35)
-        Button(self.root,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=540,y=370,width=110,height=35)
+        Button(self.root,text="Save",command=self.add,font=(font,15),bg="#2196f3",fg="white",cursor="hand2").place(x=180,y=370,width=110,height=35)
+        Button(self.root,text="Update",command=self.update,font=(font,15),bg="#4caf50",fg="white",cursor="hand2").place(x=300,y=370,width=110,height=35)
+        Button(self.root,text="Delete",command=self.delete,font=(font,15),bg="#f44336",fg="white",cursor="hand2").place(x=420,y=370,width=110,height=35)
+        Button(self.root,text="Clear",command=self.clear,font=(font,15),bg="#607d8b",fg="white",cursor="hand2").place(x=540,y=370,width=110,height=35)
 
         #------------ supplier details -------------
         supFrame=Frame(self.root,bd=3,relief=RIDGE)
@@ -65,15 +59,12 @@ class supplierClass:
         scrolly.pack(side=RIGHT,fill=Y)
         scrollx.config(command=self.supplierTable.xview)
         scrolly.config(command=self.supplierTable.yview)
-        self.supplierTable.heading("invoice",text="Invoice")
-        self.supplierTable.heading("name",text="Name")
-        self.supplierTable.heading("contact",text="Contact")
-        self.supplierTable.heading("desc",text="Description")
+
+        setHeadingsAndColumns(self.supplierTable, "invoice", "Invoice", 90)
+        setHeadingsAndColumns(self.supplierTable, "name", "Name", 100)
+        setHeadingsAndColumns(self.supplierTable, "contact", "Contact", 100)
+        setHeadingsAndColumns(self.supplierTable, "desc", "Description", 100)
         self.supplierTable["show"]="headings"
-        self.supplierTable.column("invoice",width=90)
-        self.supplierTable.column("name",width=100)
-        self.supplierTable.column("contact",width=100)
-        self.supplierTable.column("desc",width=100)
 
         self.supplierTable.pack(fill=BOTH,expand=1)
         self.supplierTable.bind("<ButtonRelease-1>",self.getData)

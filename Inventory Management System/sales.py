@@ -3,6 +3,7 @@ from PIL import Image, ImageTk
 from tkinter import ttk, messagebox
 import sqlite3
 import os
+from helpers import font
 
 # ------------------ BASE PATH SETUP ------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -27,28 +28,28 @@ class salesClass:
         Label(
             self.root,
             text="View Customer Bills",
-            font=("goudy old style", 30),
+            font=(font, 30),
             bg="#184a45",
             fg="white",
             bd=3,
             relief=RIDGE
         ).pack(side=TOP, fill=X, padx=10, pady=20)
 
-        lblInvoice = Label(self.root, text="Invoice No.", font=("times new roman", 15), bg="white")
+        lblInvoice = Label(self.root, text="Invoice No.", font=(font, 15), bg="white")
         lblInvoice.place(x=50, y=100)
 
-        txtInvoice = Entry(self.root, textvariable=self.varInvoice, font=("times new roman", 15), bg="lightyellow")
+        txtInvoice = Entry(self.root, textvariable=self.varInvoice, font=(font, 15), bg="lightyellow")
         txtInvoice.place(x=160, y=100, width=180, height=28)
 
         Button(
             self.root, text="Search", command=self.search,
-            font=("times new roman", 15, "bold"),
+            font=(font, 15, "bold"),
             bg="#2196f3", fg="white", cursor="hand2"
         ).place(x=360, y=100, width=120, height=28)
 
         Button(
             self.root, text="Clear", command=self.clear,
-            font=("times new roman", 15, "bold"),
+            font=(font, 15, "bold"),
             bg="lightgray", cursor="hand2"
         ).place(x=490, y=100, width=120, height=28)
 
@@ -58,7 +59,7 @@ class salesClass:
 
         scrolly = Scrollbar(salesFrame, orient=VERTICAL)
         self.salesList = Listbox(
-            salesFrame, font=("goudy old style", 15),
+            salesFrame, font=(font, 15),
             bg="white", yscrollcommand=scrolly.set
         )
         scrolly.pack(side=RIGHT, fill=Y)
@@ -72,7 +73,7 @@ class salesClass:
 
         Label(
             billFrame, text="Customer Bill Area",
-            font=("goudy old style", 20), bg="orange"
+            font=(font, 20), bg="orange"
         ).pack(side=TOP, fill=X)
 
         scrolly2 = Scrollbar(billFrame, orient=VERTICAL)
