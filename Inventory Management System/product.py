@@ -44,9 +44,9 @@ class productClass:
         cmbSup.place(x=150,y=110,width=200)
         cmbSup.current(0)
 
-        addLabelAndEntry(self, productFrame, "Name", self.varName, 30, 160, 150, 160, 200)
-        addLabelAndEntry(self, productFrame, "Price", self.varPrice, 30, 210, 150, 210, 200)
-        addLabelAndEntry(self, productFrame, "Quantity", self.varQty, 30, 260, 150, 260, 200)
+        addLabelAndEntry(productFrame, "Name", self.varName, 30, 160, 150, 160, 200)
+        addLabelAndEntry(productFrame, "Price", self.varPrice, 30, 210, 150, 210, 200)
+        addLabelAndEntry(productFrame, "Quantity", self.varQty, 30, 260, 150, 260, 200)
 
         cmbStatus=ttk.Combobox(productFrame,textvariable=self.varStatus,values=("Active","Inactive"),state='readonly',justify=CENTER,font=(font,15))
         cmbStatus.place(x=150,y=310,width=200)
@@ -213,7 +213,7 @@ class productClass:
                     messagebox.showerror("Error","Invalid Product",parent=self.root)
                 else:
                     op=messagebox.askyesno("Confirm","Do you really want to delete?",parent=self.root)
-                    if op==True:
+                    if op:
                         cur.execute("delete from product where pid=?",(self.varPid.get(),))
                         con.commit()
                         messagebox.showinfo("Delete","Product Deleted Successfully",parent=self.root)

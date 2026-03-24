@@ -33,7 +33,7 @@ This module is for managing suppliers. The module lets the user search for a sup
 # T2. Refactoring
 
 - Changed variable and function naming convention to use lowerCamelCase so that it is consistent across all python files
-- Removed unused variables
+- Removed unused variables and imports
 - Created helpers.py that has helper functions that can be reused for labeling for example
 - Added helper function setHeadingsAndColumns and addLabelAndEntry
 - Added global font variable in helpers.py
@@ -54,7 +54,11 @@ This module is for managing suppliers. The module lets the user search for a sup
 - Added correct filepath for images
 - Created addImage function to reduce code duplication
 - Removed unused variable in getData
+- Removed redudant clear statement in delete() function and added to self.varCatId.set("") clear() function
 
-4. employee.py, product.py, supplier.py
+4. employee.py, product.py, supplier.py, category.py
 - Cleaned up label and entry creation
 - Cleaned up heading and column creation
+
+5. sales.py 
+- Fixed the typo in the variable billList (was blllList)

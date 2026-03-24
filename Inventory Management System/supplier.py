@@ -32,9 +32,9 @@ class supplierClass:
         Label(self.root,text="Supplier Details",font=(font,20,"bold"),bg="#0f4d7d",fg="white").place(x=50,y=10,width=1000,height=40)
 
         #-------------- content ---------------
-        addLabelAndEntry(self, self.root, "Invoice No.", self.varSupInvoice, 50, 80, 180, 80, 180)
-        addLabelAndEntry(self, self.root, "Name", self.varName, 50, 120, 180, 120, 180)
-        addLabelAndEntry(self, self.root, "Contact", self.varContact, 50, 160, 180, 160, 180)
+        addLabelAndEntry(self.root, "Invoice No.", self.varSupInvoice, 50, 80, 180, 80, 180)
+        addLabelAndEntry(self.root, "Name", self.varName, 50, 120, 180, 120, 180)
+        addLabelAndEntry(self.root, "Contact", self.varContact, 50, 160, 180, 160, 180)
 
         #---------- row 4 ----------------
         Label(self.root,text="Description",font=(font,15),bg="white").place(x=50,y=200)
@@ -154,7 +154,7 @@ class supplierClass:
                     messagebox.showerror("Error","Invalid Invoice No.",parent=self.root)
                 else:
                     op=messagebox.askyesno("Confirm","Do you really want to delete?",parent=self.root)
-                    if op==True:
+                    if op:
                         cur.execute("delete from supplier where invoice=?",(self.varSupInvoice.get(),))
                         con.commit()
                         messagebox.showinfo("Delete","Supplier Deleted Successfully",parent=self.root)

@@ -1,5 +1,4 @@
 from tkinter import*
-from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
 from helpers import setHeadingsAndColumns, font
@@ -227,7 +226,7 @@ class employeeClass:
                     messagebox.showerror("Error","Invalid Employee ID",parent=self.root)
                 else:
                     op=messagebox.askyesno("Confirm","Do you really want to delete?",parent=self.root)
-                    if op==True:
+                    if op:
                         cur.execute("delete from employee where eid=?",(self.varEmpId.get(),))
                         con.commit()
                         messagebox.showinfo("Delete","Employee Deleted Successfully",parent=self.root)

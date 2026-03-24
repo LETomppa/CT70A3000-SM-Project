@@ -143,9 +143,9 @@ class billClass:
         addCartWidgetsFrame=Frame(self.root,bd=2,relief=RIDGE,bg="white")
         addCartWidgetsFrame.place(x=420,y=550,width=530,height=110)
 
-        addLabelAndEntry(self, addCartWidgetsFrame,"Product Name",self.varPname,5,5,5,35,190,'readonly')
-        addLabelAndEntry(self, addCartWidgetsFrame,"Price Per Qty",self.varPrice,230,5,230,35,150,'readonly')
-        addLabelAndEntry(self, addCartWidgetsFrame,"Quantity",self.varQty,390,5,390,35,120)
+        addLabelAndEntry(addCartWidgetsFrame,"Product Name",self.varPname,5,5,5,35,190,'readonly')
+        addLabelAndEntry(addCartWidgetsFrame,"Price Per Qty",self.varPrice,230,5,230,35,150,'readonly')
+        addLabelAndEntry(addCartWidgetsFrame,"Quantity",self.varQty,390,5,390,35,120)
 
         self.lblInStock=Label(addCartWidgetsFrame,text="In Stock",font=(font,15),bg="white")
         self.lblInStock.place(x=5,y=70)
@@ -275,7 +275,7 @@ class billClass:
                 index+=1
             if present=="yes":
                 op=messagebox.askyesno("Confirm","Product already present\nDo you want to Update|Remove from the Cart List",parent=self.root)
-                if op==True:
+                if op:
                     if self.varQty.get()=="0":
                         self.cartList.pop(index)
                     else:

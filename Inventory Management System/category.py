@@ -99,6 +99,7 @@ class categoryClass:
 
     def clear(self):
         self.varName.set("")
+        self.varCatId.set("")
         self.show()
 
     def getData(self):
@@ -121,13 +122,11 @@ class categoryClass:
                     messagebox.showerror("Error","Invalid Category Name",parent=self.root)
                 else:
                     op=messagebox.askyesno("Confirm","Do you really want to delete?",parent=self.root)
-                    if op==True:
+                    if op:
                         cur.execute("delete from category where cid=?",(self.varCatId.get(),))
                         con.commit()
                         messagebox.showinfo("Delete","Category Deleted Successfully",parent=self.root)
                         self.clear()
-                        self.varCatId.set("")
-                        self.varName.set("")
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
