@@ -29,14 +29,14 @@ class productClass:
         productFrame.place(x=10,y=10,width=450,height=480)
 
         #------------ title --------------
-        title=Label(productFrame,text="Manage Product Details",font=("goudy old style",18),bg="#0f4d7d",fg="white").pack(side=TOP,fill=X)
+        Label(productFrame,text="Manage Product Details",font=("goudy old style",18),bg="#0f4d7d",fg="white").pack(side=TOP,fill=X)
 
-        lblCategory=Label(productFrame,text="Category",font=("goudy old style",18),bg="white").place(x=30,y=60)
-        lblSupplier=Label(productFrame,text="Supplier",font=("goudy old style",18),bg="white").place(x=30,y=110)
-        lblProductName=Label(productFrame,text="Name",font=("goudy old style",18),bg="white").place(x=30,y=160)
-        lblPrice=Label(productFrame,text="Price",font=("goudy old style",18),bg="white").place(x=30,y=210)
-        lblQty=Label(productFrame,text="Quantity",font=("goudy old style",18),bg="white").place(x=30,y=260)
-        lblStatus=Label(productFrame,text="Status",font=("goudy old style",18),bg="white").place(x=30,y=310)
+        Label(productFrame,text="Category",font=("goudy old style",18),bg="white").place(x=30,y=60)
+        Label(productFrame,text="Supplier",font=("goudy old style",18),bg="white").place(x=30,y=110)
+        Label(productFrame,text="Name",font=("goudy old style",18),bg="white").place(x=30,y=160)
+        Label(productFrame,text="Price",font=("goudy old style",18),bg="white").place(x=30,y=210)
+        Label(productFrame,text="Quantity",font=("goudy old style",18),bg="white").place(x=30,y=260)
+        Label(productFrame,text="Status",font=("goudy old style",18),bg="white").place(x=30,y=310)
 
         cmbCat=ttk.Combobox(productFrame,textvariable=self.varCat,values=self.catList,state='readonly',justify=CENTER,font=("goudy old style",15))
         cmbCat.place(x=150,y=60,width=200)
@@ -46,19 +46,19 @@ class productClass:
         cmbSup.place(x=150,y=110,width=200)
         cmbSup.current(0)
 
-        txtName=Entry(productFrame,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=150,y=160,width=200)
-        txtPrice=Entry(productFrame,textvariable=self.varPrice,font=("goudy old style",15),bg="lightyellow").place(x=150,y=210,width=200)
-        txtQty=Entry(productFrame,textvariable=self.varQty,font=("goudy old style",15),bg="lightyellow").place(x=150,y=260,width=200)
+        Entry(productFrame,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=150,y=160,width=200)
+        Entry(productFrame,textvariable=self.varPrice,font=("goudy old style",15),bg="lightyellow").place(x=150,y=210,width=200)
+        Entry(productFrame,textvariable=self.varQty,font=("goudy old style",15),bg="lightyellow").place(x=150,y=260,width=200)
 
         cmbStatus=ttk.Combobox(productFrame,textvariable=self.varStatus,values=("Active","Inactive"),state='readonly',justify=CENTER,font=("goudy old style",15))
         cmbStatus.place(x=150,y=310,width=200)
         cmbStatus.current(0)
 
         #-------------- buttons -----------------
-        btnAdd=Button(productFrame,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=10,y=400,width=100,height=40)
-        btnUpdate=Button(productFrame,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=120,y=400,width=100,height=40)
-        btnDelete=Button(productFrame,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=230,y=400,width=100,height=40)
-        btnClear=Button(productFrame,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=340,y=400,width=100,height=40)
+        Button(productFrame,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=10,y=400,width=100,height=40)
+        Button(productFrame,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=120,y=400,width=100,height=40)
+        Button(productFrame,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=230,y=400,width=100,height=40)
+        Button(productFrame,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=340,y=400,width=100,height=40)
 
         #---------- Search Frame -------------
         searchFrame=LabelFrame(self.root,text="Search Product",font=("goudy old style",12,"bold"),bd=2,relief=RIDGE,bg="white")
@@ -69,8 +69,8 @@ class productClass:
         cmbSearch.place(x=10,y=10,width=180)
         cmbSearch.current(0)
 
-        txtSearch=Entry(searchFrame,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=200,y=10)
-        btnSearch=Button(searchFrame,text="Search",command=self.search,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
+        Entry(searchFrame,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=200,y=10)
+        Button(searchFrame,text="Search",command=self.search,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
 
         #------------ product details -------------
         productListFrame=Frame(self.root,bd=3,relief=RIDGE)

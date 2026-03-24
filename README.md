@@ -32,9 +32,8 @@ This module is for managing suppliers. The module lets the user search for a sup
 
 # T2. Refactoring
 
-Changed variable and function naming convention to use lowerCamelCase so that it is consistent across all python files
-
-Removed unused variables from dashboard and billing
+- Changed variable and function naming convention to use lowerCamelCase so that it is consistent across all python files
+- Removed unused variables
 
 1. dashboard.py
 - Simplified button creation for sidebar to use a for loop
@@ -48,3 +47,10 @@ Removed unused variables from dashboard and billing
 - Added function addLabelAndEntry
 - Removed useless self.siscount as it didnt do anything
 - Removed useless comments for billTop, billMiddle, and billBottom
+
+3. category.py
+- Added correct filepath for images
+- Created addImage function to reduce code duplication
+- Removed unused variable in getData
+
+4. employee.py

@@ -15,13 +15,13 @@ class categoryClass:
         self.varCatId=StringVar()
         self.varName=StringVar()
         #--------------- title ---------------------
-        lblTitle=Label(self.root,text="Manage Product Category",font=("goudy old style",30),bg="#184a45",fg="white",bd=3,relief=RIDGE).pack(side=TOP,fill=X,padx=10,pady=20)
+        Label(self.root,text="Manage Product Category",font=("goudy old style",30),bg="#184a45",fg="white",bd=3,relief=RIDGE).pack(side=TOP,fill=X,padx=10,pady=20)
 
-        lblMame=Label(self.root,text="Enter Category Name",font=("goudy old style",30),bg="white").place(x=50,y=100)
-        txtMame=Entry(self.root,textvariable=self.varName,bg="lightyellow",font=("goudy old style",18)).place(x=50,y=170,width=300)
+        Label(self.root,text="Enter Category Name",font=("goudy old style",30),bg="white").place(x=50,y=100)
+        Entry(self.root,textvariable=self.varName,bg="lightyellow",font=("goudy old style",18)).place(x=50,y=170,width=300)
 
-        btnAdd=Button(self.root,text="ADD",command=self.add,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=360,y=170,width=150,height=30)
-        btnDelete=Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="red",fg="white",cursor="hand2").place(x=520,y=170,width=150,height=30)
+        Button(self.root,text="ADD",command=self.add,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=360,y=170,width=150,height=30)
+        Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="red",fg="white",cursor="hand2").place(x=520,y=170,width=150,height=30)
 
         #------------ category details -------------
         catFrame=Frame(self.root,bd=3,relief=RIDGE)
@@ -46,18 +46,18 @@ class categoryClass:
         self.show()
 
         #----------------- images ---------------------
-        self.im1=Image.open("Inventory-Management-System/images/cat.jpg")
-        self.im1=self.im1.resize((500,250))
-        self.im1=ImageTk.PhotoImage(self.im1)
-        self.lblIm1=Label(self.root,image=self.im1,bd=2,relief=RAISED)
-        self.lblIm1.place(x=50,y=220)
-
-        self.im2=Image.open("Inventory-Management-System/images/category.jpg")
-        self.im2=self.im2.resize((500,250))
-        self.im2=ImageTk.PhotoImage(self.im2)
-        self.lblIm2=Label(self.root,image=self.im2,bd=2,relief=RAISED)
-        self.lblIm2.place(x=580,y=220)
+        self.addImage("images/cat.jpg", 50, 220)
+        self.addImage("images/category.jpg", 580, 220)
 #----------------------------------------------------------------------------------
+
+    def addImage(self, path, x, y):
+        img = Image.open(path)
+        img = img.resize((500, 250))
+        img = ImageTk.PhotoImage(img)
+        lbl = Label(self.root, image=img, bd=2, relief=RAISED)
+        lbl.image = img
+        lbl.place(x=x, y=y)
+
     def add(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -97,7 +97,7 @@ class categoryClass:
         self.varName.set("")
         self.show()
 
-    def getData(self,ev):
+    def getData(self):
         f=self.categoryTable.focus()
         content=(self.categoryTable.item(f))
         row=content['values']

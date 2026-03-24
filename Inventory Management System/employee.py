@@ -35,57 +35,57 @@ class employeeClass:
         cmbSearch.place(x=10,y=10,width=180)
         cmbSearch.current(0)
 
-        txtSearch=Entry(searchFrame,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=200,y=10)
-        btnSearch=Button(searchFrame,command=self.search,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
+        Entry(searchFrame,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=200,y=10)
+        Button(searchFrame,command=self.search,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=410,y=9,width=150,height=30)
 
         #-------------- title ---------------
-        title=Label(self.root,text="Employee Details",font=("goudy old style",15),bg="#0f4d7d",fg="white").place(x=50,y=100,width=1000)
+        Label(self.root,text="Employee Details",font=("goudy old style",15),bg="#0f4d7d",fg="white").place(x=50,y=100,width=1000)
 
         #-------------- content ---------------
         #---------- row 1 ----------------
-        lblEmpid=Label(self.root,text="Emp ID",font=("goudy old style",15),bg="white").place(x=50,y=150)
-        lblGender=Label(self.root,text="Gender",font=("goudy old style",15),bg="white").place(x=350,y=150)
-        lblContact=Label(self.root,text="Contact",font=("goudy old style",15),bg="white").place(x=750,y=150)
+        Label(self.root,text="Emp ID",font=("goudy old style",15),bg="white").place(x=50,y=150)
+        Label(self.root,text="Gender",font=("goudy old style",15),bg="white").place(x=350,y=150)
+        Label(self.root,text="Contact",font=("goudy old style",15),bg="white").place(x=750,y=150)
 
-        txtEmpid=Entry(self.root,textvariable=self.varEmpId,font=("goudy old style",15),bg="lightyellow").place(x=150,y=150,width=180)
+        Entry(self.root,textvariable=self.varEmpId,font=("goudy old style",15),bg="lightyellow").place(x=150,y=150,width=180)
         cmbGender=ttk.Combobox(self.root,textvariable=self.varGender,values=("Select","Male","Female","Other"),state='readonly',justify=CENTER,font=("goudy old style",15))
         cmbGender.place(x=500,y=150,width=180)
         cmbGender.current(0)
-        txtContact=Entry(self.root,textvariable=self.varContact,font=("goudy old style",15),bg="lightyellow").place(x=850,y=150,width=180)
+        Entry(self.root,textvariable=self.varContact,font=("goudy old style",15),bg="lightyellow").place(x=850,y=150,width=180)
 
         #---------- row 2 ----------------
-        lblName=Label(self.root,text="Name",font=("goudy old style",15),bg="white").place(x=50,y=190)
-        lblDob=Label(self.root,text="D.O.B.",font=("goudy old style",15),bg="white").place(x=350,y=190)
-        lblDoj=Label(self.root,text="D.O.J.",font=("goudy old style",15),bg="white").place(x=750,y=190)
+        Label(self.root,text="Name",font=("goudy old style",15),bg="white").place(x=50,y=190)
+        Label(self.root,text="D.O.B.",font=("goudy old style",15),bg="white").place(x=350,y=190)
+        Label(self.root,text="D.O.J.",font=("goudy old style",15),bg="white").place(x=750,y=190)
 
-        txtName=Entry(self.root,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=150,y=190,width=180)
-        txtDob=Entry(self.root,textvariable=self.varDob,font=("goudy old style",15),bg="lightyellow").place(x=500,y=190,width=180)
-        txtDoj=Entry(self.root,textvariable=self.varDoj,font=("goudy old style",15),bg="lightyellow").place(x=850,y=190,width=180)
+        Entry(self.root,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=150,y=190,width=180)
+        Entry(self.root,textvariable=self.varDob,font=("goudy old style",15),bg="lightyellow").place(x=500,y=190,width=180)
+        Entry(self.root,textvariable=self.varDoj,font=("goudy old style",15),bg="lightyellow").place(x=850,y=190,width=180)
 
         #---------- row 3 ----------------
-        lblEmail=Label(self.root,text="Email",font=("goudy old style",15),bg="white").place(x=50,y=230)
-        lblPass=Label(self.root,text="Password",font=("goudy old style",15),bg="white").place(x=350,y=230)
-        lblUtype=Label(self.root,text="User Type",font=("goudy old style",15),bg="white").place(x=750,y=230)
+        Label(self.root,text="Email",font=("goudy old style",15),bg="white").place(x=50,y=230)
+        Label(self.root,text="Password",font=("goudy old style",15),bg="white").place(x=350,y=230)
+        Label(self.root,text="User Type",font=("goudy old style",15),bg="white").place(x=750,y=230)
 
-        txtEmail=Entry(self.root,textvariable=self.varEmail,font=("goudy old style",15),bg="lightyellow").place(x=150,y=230,width=180)
-        txtPass=Entry(self.root,textvariable=self.varPass,font=("goudy old style",15),bg="lightyellow").place(x=500,y=230,width=180)
+        Entry(self.root,textvariable=self.varEmail,font=("goudy old style",15),bg="lightyellow").place(x=150,y=230,width=180)
+        Entry(self.root,textvariable=self.varPass,font=("goudy old style",15),bg="lightyellow").place(x=500,y=230,width=180)
         cmbUtype=ttk.Combobox(self.root,textvariable=self.varUtype,values=("Admin","Employee"),state='readonly',justify=CENTER,font=("goudy old style",15))
         cmbUtype.place(x=850,y=230,width=180)
         cmbUtype.current(0)
 
         #---------- row 4 ----------------
-        lblAddress=Label(self.root,text="Address",font=("goudy old style",15),bg="white").place(x=50,y=270)
-        lblSalary=Label(self.root,text="Salary",font=("goudy old style",15),bg="white").place(x=500,y=270)
+        Label(self.root,text="Address",font=("goudy old style",15),bg="white").place(x=50,y=270)
+        Label(self.root,text="Salary",font=("goudy old style",15),bg="white").place(x=500,y=270)
 
         self.txtAddress=Text(self.root,font=("goudy old style",15),bg="lightyellow")
         self.txtAddress.place(x=150,y=270,width=300,height=60)
-        txtSalary=Entry(self.root,textvariable=self.varSalary,font=("goudy old style",15),bg="lightyellow").place(x=600,y=270,width=180)
+        Entry(self.root,textvariable=self.varSalary,font=("goudy old style",15),bg="lightyellow").place(x=600,y=270,width=180)
 
         #-------------- buttons -----------------
-        btnAdd=Button(self.root,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=500,y=305,width=110,height=28)
-        btnUpdate=Button(self.root,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=620,y=305,width=110,height=28)
-        btnDelete=Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=740,y=305,width=110,height=28)
-        btnClear=Button(self.root,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=860,y=305,width=110,height=28)
+        Button(self.root,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=500,y=305,width=110,height=28)
+        Button(self.root,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=620,y=305,width=110,height=28)
+        Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=740,y=305,width=110,height=28)
+        Button(self.root,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=860,y=305,width=110,height=28)
 
         #------------ employee details -------------
         empFrame=Frame(self.root,bd=3,relief=RIDGE)

@@ -23,35 +23,35 @@ class supplierClass:
         lblSearch=Label(self.root,text="Invoice No.",bg="white",font=("goudy old style",15))
         lblSearch.place(x=700,y=80)
 
-        txtSearch=Entry(self.root,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=850,y=80,width=160)
-        btnSearch=Button(self.root,command=self.search,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=980,y=79,width=100,height=28)
+        Entry(self.root,textvariable=self.varSearchtxt,font=("goudy old style",15),bg="lightyellow").place(x=850,y=80,width=160)
+        Button(self.root,command=self.search,text="Search",font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=980,y=79,width=100,height=28)
 
         #-------------- title ---------------
-        title=Label(self.root,text="Supplier Details",font=("goudy old style",20,"bold"),bg="#0f4d7d",fg="white").place(x=50,y=10,width=1000,height=40)
+        Label(self.root,text="Supplier Details",font=("goudy old style",20,"bold"),bg="#0f4d7d",fg="white").place(x=50,y=10,width=1000,height=40)
 
         #-------------- content ---------------
         #---------- row 1 ----------------
-        lblSupplierInvoice=Label(self.root,text="Invoice No.",font=("goudy old style",15),bg="white").place(x=50,y=80)
-        txtSupplierInvoice=Entry(self.root,textvariable=self.varSupInvoice,font=("goudy old style",15),bg="lightyellow").place(x=180,y=80,width=180)
+        Label(self.root,text="Invoice No.",font=("goudy old style",15),bg="white").place(x=50,y=80)
+        Entry(self.root,textvariable=self.varSupInvoice,font=("goudy old style",15),bg="lightyellow").place(x=180,y=80,width=180)
 
         #---------- row 2 ----------------
-        lblName=Label(self.root,text="Name",font=("goudy old style",15),bg="white").place(x=50,y=120)
-        txtName=Entry(self.root,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=180,y=120,width=180)
+        Label(self.root,text="Name",font=("goudy old style",15),bg="white").place(x=50,y=120)
+        Entry(self.root,textvariable=self.varName,font=("goudy old style",15),bg="lightyellow").place(x=180,y=120,width=180)
 
         #---------- row 3 ----------------
-        lblContact=Label(self.root,text="Contact",font=("goudy old style",15),bg="white").place(x=50,y=160)
-        txtContact=Entry(self.root,textvariable=self.varContact,font=("goudy old style",15),bg="lightyellow").place(x=180,y=160,width=180)
+        Label(self.root,text="Contact",font=("goudy old style",15),bg="white").place(x=50,y=160)
+        Entry(self.root,textvariable=self.varContact,font=("goudy old style",15),bg="lightyellow").place(x=180,y=160,width=180)
 
         #---------- row 4 ----------------
-        lblDesc=Label(self.root,text="Description",font=("goudy old style",15),bg="white").place(x=50,y=200)
+        Label(self.root,text="Description",font=("goudy old style",15),bg="white").place(x=50,y=200)
         self.txtDesc=Text(self.root,font=("goudy old style",15),bg="lightyellow")
         self.txtDesc.place(x=180,y=200,width=470,height=120)
 
         #-------------- buttons -----------------
-        btnAdd=Button(self.root,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=180,y=370,width=110,height=35)
-        btnUpdate=Button(self.root,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=300,y=370,width=110,height=35)
-        btnDelete=Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=420,y=370,width=110,height=35)
-        btnClear=Button(self.root,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=540,y=370,width=110,height=35)
+        Button(self.root,text="Save",command=self.add,font=("goudy old style",15),bg="#2196f3",fg="white",cursor="hand2").place(x=180,y=370,width=110,height=35)
+        Button(self.root,text="Update",command=self.update,font=("goudy old style",15),bg="#4caf50",fg="white",cursor="hand2").place(x=300,y=370,width=110,height=35)
+        Button(self.root,text="Delete",command=self.delete,font=("goudy old style",15),bg="#f44336",fg="white",cursor="hand2").place(x=420,y=370,width=110,height=35)
+        Button(self.root,text="Clear",command=self.clear,font=("goudy old style",15),bg="#607d8b",fg="white",cursor="hand2").place(x=540,y=370,width=110,height=35)
 
         #------------ supplier details -------------
         supFrame=Frame(self.root,bd=3,relief=RIDGE)

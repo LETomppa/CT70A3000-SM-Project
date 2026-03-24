@@ -24,7 +24,7 @@ class salesClass:
         self.varInvoice = StringVar()
 
         # --------------- title ---------------------
-        lblTitle = Label(
+        Label(
             self.root,
             text="View Customer Bills",
             font=("goudy old style", 30),
@@ -40,13 +40,13 @@ class salesClass:
         txtInvoice = Entry(self.root, textvariable=self.varInvoice, font=("times new roman", 15), bg="lightyellow")
         txtInvoice.place(x=160, y=100, width=180, height=28)
 
-        btnSearch = Button(
+        Button(
             self.root, text="Search", command=self.search,
             font=("times new roman", 15, "bold"),
             bg="#2196f3", fg="white", cursor="hand2"
         ).place(x=360, y=100, width=120, height=28)
 
-        btnClear = Button(
+        Button(
             self.root, text="Clear", command=self.clear,
             font=("times new roman", 15, "bold"),
             bg="lightgray", cursor="hand2"
@@ -70,7 +70,7 @@ class salesClass:
         billFrame = Frame(self.root, bd=3, relief=RIDGE)
         billFrame.place(x=280, y=140, width=410, height=330)
 
-        lblTitle2 = Label(
+        Label(
             billFrame, text="Customer Bill Area",
             font=("goudy old style", 20), bg="orange"
         ).pack(side=TOP, fill=X)
