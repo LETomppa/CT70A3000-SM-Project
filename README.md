@@ -68,8 +68,16 @@ This module is for managing suppliers. The module lets the user search for a sup
 The hypothetical stakeholders have said that they want to open the billing module from the dashboard itself. This has now been implemented as a button on the bottom right. 
 
 # T4. Testing and Test Coverage
-- Added 3 unit tests in test.py
+
+Used https://docs.python.org/3/library/unittest.html as the testing framework
+
+- Added 3 unit tests (tests/unitTests.py)
     - testAddUpdateCart: adds a product to the cart and checks that it is in the cart list
     - testBillUpdate: checks that the bill updates the correct netPay for the items in the cart
     - testPerformCal: Tests that the calculator in billing works as intended
 
+- Added 2 integration tests (tests/integrationTests.py)
+    - TestAddEmployeeSavesToDatabase: Adding an employee saves it to the database and refreshes the table, then adds another employee and checks the database again
+    - TestAddSupplierCategoryProduct: Adding a supplier, a category, and then a product that uses both, then checking the database that everything was saved correctly-A
+
+- Added regression tests that test all unit tests and integration tests (tests/regressionTests.py)

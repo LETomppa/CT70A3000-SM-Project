@@ -1,9 +1,13 @@
-# Used https://docs.python.org/3/library/unittest.html as the unit testing framework
 import unittest
 import tkinter as tk
 from unittest.mock import MagicMock
+import sys
+import os
+
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 from billing import billClass
+
 
 
 class TestBilling(unittest.TestCase):
