@@ -1,3 +1,5 @@
+# Video link: https://youtu.be/irXN8hUSA84
+
 # T1. Code Comprehension
 pyreverse was used in creating the class diagram and dependency graph: https://pylint.pycqa.org/en/latest/additional_tools/pyreverse/index.html. PlantUML was used in creating the sequence diagram.
 
@@ -46,7 +48,6 @@ This module is for managing suppliers. The module lets the user search for a sup
 
 2. billing.py
 - Simplified button creation to use for loop so there isnt code duplication
-- Added function addLabelAndEntry
 - Removed useless self.siscount as it didnt do anything
 - Removed useless comments for billTop, billMiddle, and billBottom
 - removed unused variable "ev" from getData and getDataCart
