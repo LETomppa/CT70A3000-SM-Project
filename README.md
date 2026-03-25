@@ -49,6 +49,7 @@ This module is for managing suppliers. The module lets the user search for a sup
 - Added function addLabelAndEntry
 - Removed useless self.siscount as it didnt do anything
 - Removed useless comments for billTop, billMiddle, and billBottom
+- removed unused variable "ev" from getData and getDataCart
 
 3. category.py
 - Added correct filepath for images
@@ -67,3 +68,8 @@ This module is for managing suppliers. The module lets the user search for a sup
 The hypothetical stakeholders have said that they want to open the billing module from the dashboard itself. This has now been implemented as a button on the bottom right. 
 
 # T4. Testing and Test Coverage
+- Added 3 unit tests in test.py
+    - testAddUpdateCart: adds a product to the cart and checks that it is in the cart list
+    - testBillUpdate: checks that the bill updates the correct netPay for the items in the cart
+    - testPerformCal: Tests that the calculator in billing works as intended
+

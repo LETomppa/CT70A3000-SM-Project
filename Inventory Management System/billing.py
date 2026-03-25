@@ -233,7 +233,7 @@ class billClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
-    def getData(self,ev):
+    def getData(self):
         f=self.productTable.focus()
         content=(self.productTable.item(f))
         row=content['values']
@@ -244,7 +244,7 @@ class billClass:
         self.varStock.set(row[3])
         self.varQty.set('1')
 
-    def getDataCart(self,ev):
+    def getDataCart(self):
         f=self.cartTable.focus()
         content=(self.cartTable.item(f))
         row=content['values']
@@ -324,7 +324,7 @@ class billClass:
         self.invoice=int(time.strftime("%H%M%S"))+int(time.strftime("%d%m%Y"))
         billTopTemp=f'''
 \t\tXYZ-Inventory
-\t Phone No. 9899459288 , Lappeenranta-110053
+\t Phone No. 9899459288 , Delhi-110053
 {str("="*46)}
  Customer Name: {self.varCname.get()}
  Ph. no. : {self.varContact.get()}
