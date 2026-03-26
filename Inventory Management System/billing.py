@@ -238,7 +238,7 @@ class billClass:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
     #Get data from the selected product
-    def getData(self):
+    def getData(self, ev):
         f=self.productTable.focus()
         content=(self.productTable.item(f))
         row=content['values']
@@ -250,7 +250,7 @@ class billClass:
         self.varQty.set('1')
 
     #Get data from the selected cart item
-    def getDataCart(self):
+    def getDataCart(self, ev):
         f=self.cartTable.focus()
         content=(self.cartTable.item(f))
         row=content['values']

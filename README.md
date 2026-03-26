@@ -52,7 +52,6 @@ This module is for managing suppliers. The module lets the user search for a sup
 - Simplified button creation to use for loop so there isnt code duplication
 - Removed useless self.siscount as it didnt do anything
 - Removed useless comments for billTop, billMiddle, and billBottom
-- removed unused variable "ev" from getData and getDataCart
 
 3. category.py
 - Added correct filepath for images
