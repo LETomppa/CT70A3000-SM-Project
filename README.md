@@ -40,6 +40,7 @@ This module is for managing suppliers. The module lets the user search for a sup
 - Added helper function setHeadingsAndColumns and addLabelAndEntry
 - Added global font variable in helpers.py
 - Added comments
+- Moved add, show, getdata, update, delete, and search functionality to helpers.py
 
 1. dashboard.py
 - Simplified button creation for sidebar to use a for loop
