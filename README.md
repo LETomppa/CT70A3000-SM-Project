@@ -56,7 +56,6 @@ This module is for managing suppliers. The module lets the user search for a sup
 3. category.py
 - Added correct filepath for images
 - Created addImage function to reduce code duplication
-- Removed unused variable in getData
 - Removed redudant clear statement in delete() function and added to self.varCatId.set("") clear() function
 
 4. employee.py, product.py, supplier.py, category.py
@@ -80,6 +79,6 @@ Used https://docs.python.org/3/library/unittest.html as the testing framework
 
 - Added 2 integration tests (tests/integrationTests.py)
     - TestAddEmployeeSavesToDatabase: Adding an employee saves it to the database and refreshes the table, then adds another employee and checks the database again
-    - TestAddSupplierCategoryProduct: Adding a supplier, a category, and then a product that uses both, then checking the database that everything was saved correctly-A
+    - TestAddSupplierCategoryProduct: Adding a supplier, a category, and then a product that uses both, then checking the database that everything was saved correctly
 
 - Added regression tests that test all unit tests and integration tests (tests/regressionTests.py)
