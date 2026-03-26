@@ -70,6 +70,7 @@ class supplierClass:
         self.supplierTable.bind("<ButtonRelease-1>",self.getData)
         self.show()
 #-----------------------------------------------------------------------------------------------------
+    #Add a new supplier to the database
     def add(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -95,6 +96,7 @@ class supplierClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Update the selected supplier's details in the database
     def show(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -107,6 +109,7 @@ class supplierClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Get the selected supplier data and populate the fields for editing or deletion
     def getData(self,ev):
         f=self.supplierTable.focus()
         content=(self.supplierTable.item(f))
@@ -117,6 +120,7 @@ class supplierClass:
         self.txtDesc.delete('1.0',END)
         self.txtDesc.insert(END,row[3])
 
+    #Update the selected supplier's information in the database
     def update(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -141,6 +145,7 @@ class supplierClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Delete the selected supplier from the database
     def delete(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -162,6 +167,7 @@ class supplierClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Clear all input fields
     def clear(self):
         self.varSupInvoice.set("")
         self.varName.set("")
@@ -170,6 +176,7 @@ class supplierClass:
         self.varSearchtxt.set("")
         self.show()
 
+    #Search for suppliers based on the selected search criteria and input text
     def search(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()

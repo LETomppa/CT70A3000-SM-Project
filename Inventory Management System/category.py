@@ -54,6 +54,7 @@ class categoryClass:
         self.addImage(os.path.join(IMAGE_DIR, "category.jpg"), 580, 220)
 #----------------------------------------------------------------------------------
 
+    #Add image to the GUI at specified path and coordinates
     def addImage(self, path, x, y):
         img = Image.open(path)
         img = img.resize((500, 250))
@@ -62,6 +63,7 @@ class categoryClass:
         lbl.image = img
         lbl.place(x=x, y=y)
 
+    #Add a new category to the database
     def add(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -84,6 +86,7 @@ class categoryClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Display all categories in the category table
     def show(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -96,12 +99,13 @@ class categoryClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
-
+    #Clears all fields and resets the form
     def clear(self):
         self.varName.set("")
         self.varCatId.set("")
         self.show()
 
+    #Get the selected category data and populate the fields for editing or deletion
     def getData(self):
         f=self.categoryTable.focus()
         content=(self.categoryTable.item(f))
@@ -109,6 +113,7 @@ class categoryClass:
         self.varCatId.set(row[0])
         self.varName.set(row[1])
 
+    #Delete the selected category from the database
     def delete(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()

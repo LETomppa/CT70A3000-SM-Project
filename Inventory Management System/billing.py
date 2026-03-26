@@ -188,21 +188,24 @@ class billClass:
         btnGenerate.place(x=246,y=80,width=160,height=50)
 
         self.show()
-        #self.billTop()
         self.updateDateTime()
 #---------------------- all functions ------------------------------
 
+    #Get calculator input
     def getInput(self,num):
         xnum=self.varCalInput.get()+str(num)
         self.varCalInput.set(xnum)
 
+    #Clear calculator input
     def clearCal(self):
         self.varCalInput.set('')
 
+    #Perform calculator operation
     def performCal(self):
         result=self.varCalInput.get()
         self.varCalInput.set(eval(result))
 
+    #Show products in the product table
     def show(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -215,6 +218,7 @@ class billClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Search products in the product table
     def search(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -233,6 +237,7 @@ class billClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Get data from the selected product
     def getData(self):
         f=self.productTable.focus()
         content=(self.productTable.item(f))
@@ -244,6 +249,7 @@ class billClass:
         self.varStock.set(row[3])
         self.varQty.set('1')
 
+    #Get data from the selected cart item
     def getDataCart(self):
         f=self.cartTable.focus()
         content=(self.cartTable.item(f))
@@ -255,6 +261,7 @@ class billClass:
         self.lblInStock.config(text=f"In Stock [{str(row[4])}]")
         self.varStock.set(row[4])
 
+    #Add or update cart items
     def addUpdateCart(self):
         if self.varPid.get()=="":
             messagebox.showerror("Error","Please select product from the list",parent=self.root)
@@ -285,6 +292,7 @@ class billClass:
             self.showCart()
             self.billUpdate()
 
+    #Update bill amount, discount and net pay
     def billUpdate(self):
         self.billAmnt=0
         self.netPay=0
@@ -296,6 +304,7 @@ class billClass:
         self.lblNetPay.config(text=f"Net Pay\n{str(self.netPay)}")
         self.cartTitle.config(text=f"Cart \t Total Products: [{str(len(self.cartList))}]")
 
+    #Show cart items in the cart table
     def showCart(self):
         try:
             self.cartTable.delete(*self.cartTable.get_children())
@@ -304,6 +313,7 @@ class billClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Generate bill
     def generateBill(self):
         if self.varCname.get()=="" or self.varContact.get()=="":
             messagebox.showerror("Error",f"Customer Details are required",parent=self.root)
@@ -319,7 +329,7 @@ class billClass:
             fp.close()
             messagebox.showinfo("Saved","Bill has been generated",parent=self.root)
             self.chkPrint=1
-
+    #Generate bill top
     def billTop(self):
         self.invoice=int(time.strftime("%H%M%S"))+int(time.strftime("%d%m%Y"))
         billTopTemp=f'''
@@ -335,7 +345,7 @@ class billClass:
 '''
         self.txtBillArea.delete('1.0',END)
         self.txtBillArea.insert('1.0',billTopTemp)
-
+    #Generate bill bottom
     def billBottom(self):
         billBottomTemp=f'''
 {str("="*46)}
@@ -345,7 +355,7 @@ class billClass:
 {str("="*46)}\n
 '''
         self.txtBillArea.insert(END,billBottomTemp)
-
+    #Generate bill middle
     def billMiddle(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -373,6 +383,7 @@ class billClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}",parent=self.root)
 
+    #Clear cart items
     def clearCart(self):
         self.varPid.set("")
         self.varPname.set("")
@@ -381,6 +392,7 @@ class billClass:
         self.lblInStock.config(text=f"In Stock")
         self.varStock.set("")
 
+    #Clear all fields and reset the form
     def clearAll(self):
         del self.cartList[:]
         self.clearCart()
@@ -393,12 +405,14 @@ class billClass:
         self.cartTitle.config(text=f"Cart \t Total Products: [0]")
         self.varSearch.set("")
 
+    #Update date and time in the clock label
     def updateDateTime(self):
         timeStr=time.strftime("%I:%M:%S")
         dateStr=time.strftime("%d-%m-%Y")
         self.lblClock.config(text=f"Welcome to Inventory Management System\t\t Date: {str(dateStr)}\t\t Time: {str(timeStr)}")
         self.lblClock.after(200,self.updateDateTime)
 
+    #Print the bill
     def printBill(self):
         if self.chkPrint==1:
             messagebox.showinfo("Print","Please wait while printing",parent=self.root)

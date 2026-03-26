@@ -94,6 +94,7 @@ class salesClass:
         self.show()
 
     # -------------------------------------------------------
+    #Display all bills in the sales list
     def show(self):
         del self.billList[:]
         self.salesList.delete(0, END)
@@ -103,6 +104,7 @@ class salesClass:
                 self.salesList.insert(END, i)
                 self.billList.append(i.split('.')[0])
 
+    #Get the selected bill from the sales list and display its contents in the bill area
     def getData(self, ev):
         index = self.salesList.curselection()
         if not index:
@@ -115,7 +117,8 @@ class salesClass:
         with open(filePath, 'r') as fp:
             for i in fp:
                 self.billArea.insert(END, i)
-
+    
+    #Search for bills based on the invoice number
     def search(self):
         if self.varInvoice.get() == "":
             messagebox.showerror("Error", "Invoice no. should be required", parent=self.root)
@@ -130,6 +133,7 @@ class salesClass:
             else:
                 messagebox.showerror("Error", "Invalid Invoice No.", parent=self.root)
 
+    #Clear the bill area and reset the search field
     def clear(self):
         self.show()
         self.billArea.delete('1.0', END)

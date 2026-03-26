@@ -97,6 +97,7 @@ class productClass:
         self.show()
         self.fetchCatSup()
 #-----------------------------------------------------------------------------------------------------
+    #Fetch the list of categories and suppliers from the database to populate the dropdowns
     def fetchCatSup(self):
         self.catList.append("Empty")
         self.supList.append("Empty")
@@ -121,7 +122,7 @@ class productClass:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
 
-
+    #Add a new product to the database
     def add(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -149,6 +150,7 @@ class productClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Display all products in the product table
     def show(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -161,6 +163,7 @@ class productClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Get the selected product data and populate the fields for editing or deletion
     def getData(self,ev):
         f=self.productTable.focus()
         content=(self.productTable.item(f))
@@ -173,6 +176,7 @@ class productClass:
         self.varQty.set(row[5])
         self.varStatus.set(row[6])
 
+    #Update the selected product's information in the database
     def update(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -200,6 +204,7 @@ class productClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Delete the selected product from the database
     def delete(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -221,6 +226,7 @@ class productClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Clear all input fields
     def clear(self):
         self.varCat.set("Select")
         self.varSup.set("Select")
@@ -234,6 +240,7 @@ class productClass:
         self.show()
 
 
+    #Search for products based on the selected search criteria and input text
     def search(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()

@@ -123,6 +123,8 @@ class IMS:
         self.updateContent()
 
     # -------------- functions ----------------
+
+    #Open the corresponding module when a menu button is clicked
     def openModule(self, id):
         self.newWin = Toplevel(self.root)
         if id == "employee":
@@ -140,6 +142,7 @@ class IMS:
         elif id == "exit":
             self.root.destroy()
 
+    #Update the content on the main page with the latest data from the database and refresh every 200 milliseconds
     def updateContent(self):
         con = sqlite3.connect(database=os.path.join(BASE_DIR, 'ims.db'))
         cur = con.cursor()

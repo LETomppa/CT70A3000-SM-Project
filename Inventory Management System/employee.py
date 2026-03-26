@@ -71,6 +71,7 @@ class employeeClass:
                    {"variable": self.varUtype, "x": 850, "y": 230},
                    {"variable": self.varSalary, "x": 600, "y": 270}]
         
+        #---------- entry creation ----------------
         for entry in entries:
             if entry["variable"] in [self.varGender, self.varUtype]:
                 cmb = ttk.Combobox(self.root, textvariable=entry["variable"], state='readonly', justify=CENTER, font=(font, 15))
@@ -121,6 +122,8 @@ class employeeClass:
         self.employeeTable.bind("<ButtonRelease-1>",self.getData)
         self.show()
 #-----------------------------------------------------------------------------------------------------
+
+    #Add a new employee to the database
     def add(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -153,6 +156,7 @@ class employeeClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Display all employees in the employee table
     def show(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -165,6 +169,7 @@ class employeeClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Get the selected employee data and populate the fields for editing or deletion
     def getData(self,ev):
         f=self.employeeTable.focus()
         content=(self.employeeTable.item(f))
@@ -182,6 +187,7 @@ class employeeClass:
         self.txtAddress.insert(END,row[9])
         self.varSalary.set(row[10])
 
+    #Update the selected employee's information in the database
     def update(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -213,6 +219,7 @@ class employeeClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Delete the selected employee from the database
     def delete(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()
@@ -234,6 +241,7 @@ class employeeClass:
         except Exception as ex:
             messagebox.showerror("Error",f"Error due to : {str(ex)}")
 
+    #Clear all input fields
     def clear(self):
         self.varEmpId.set("")
         self.varName.set("")
@@ -250,6 +258,7 @@ class employeeClass:
         self.varSearchtxt.set("")
         self.show()
 
+    #Search for employees based on the selected search criteria and input text
     def search(self):
         con=sqlite3.connect(database=r'ims.db')
         cur=con.cursor()

@@ -1,5 +1,6 @@
 import sqlite3
 
+#Create the database and tables for the Inventory Management System
 def createDb():
     con=sqlite3.connect(database=r'ims.db')
     cur=con.cursor()
