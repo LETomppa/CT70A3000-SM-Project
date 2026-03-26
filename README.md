@@ -1,5 +1,4 @@
-# Video link: https://youtu.be/irXN8hUSA84
-
+# Video link: https://youtu.be/hWj-0f644bg
 # T1. Code Comprehension
 pyreverse was used in creating the class diagram and dependency graph: https://pylint.pycqa.org/en/latest/additional_tools/pyreverse/index.html. PlantUML was used in creating the sequence diagram.
 
