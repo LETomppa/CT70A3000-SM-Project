@@ -72,7 +72,8 @@ class TestAddEmployee(unittest.TestCase):
         self.emp.varSalary.set("10000")
 
         real_connect = sqlite3.connect
-        with patch('employee.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+        with patch('helpers.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+             patch('helpers.messagebox'), \
              patch('employee.messagebox'):
             self.emp.add()
 
@@ -99,7 +100,8 @@ class TestAddEmployee(unittest.TestCase):
         self.emp.varUtype.set("Employee")
         self.emp.varSalary.set("20000")
 
-        with patch('employee.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+        with patch('helpers.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+             patch('helpers.messagebox'), \
              patch('employee.messagebox'):
             self.emp.add()
 
@@ -165,7 +167,8 @@ class TestAddSupplierCategoryProduct(unittest.TestCase):
         self.sup.varName.set("Test Supplier")
         self.sup.varContact.set("1234567890")
 
-        with patch('supplier.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+        with patch('helpers.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+             patch('helpers.messagebox'), \
              patch('supplier.messagebox'):
             self.sup.add()
 
@@ -182,7 +185,8 @@ class TestAddSupplierCategoryProduct(unittest.TestCase):
         #Add category
         self.cat.varName.set("Test Category")
 
-        with patch('category.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+        with patch('helpers.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+             patch('helpers.messagebox'), \
              patch('category.messagebox'):
             self.cat.add()
 
@@ -203,7 +207,8 @@ class TestAddSupplierCategoryProduct(unittest.TestCase):
         self.prod.varQty.set("100")
         self.prod.varStatus.set("Active")
 
-        with patch('product.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+        with patch('helpers.sqlite3.connect', side_effect=lambda *a, **kw: real_connect(self.db_path)), \
+             patch('helpers.messagebox'), \
              patch('product.messagebox'):
             self.prod.add()
 

@@ -2,7 +2,7 @@ from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
-from helpers import setHeadingsAndColumns, addLabelAndEntry, font
+from helpers import setHeadingsAndColumns, addLabelAndEntry, addRecord, showRecord, getRecordData, updateRecord, deleteRecord, searchRecord, font
 
 class productClass:
     def __init__(self,root):
@@ -124,107 +124,54 @@ class productClass:
 
     #Add a new product to the database
     def add(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            if self.varCat.get()=="Select" or self.varCat.get()=="Empty" or self.varSup=="Select" or self.varSup=="Empty":
-                messagebox.showerror("Error","All fields are required",parent=self.root)
-            else:
-                cur.execute("Select * from product where name=?",(self.varName.get(),))
-                row=cur.fetchone()
-                if row!=None:
-                    messagebox.showerror("Error","Product already present",parent=self.root)
-                else:
-                    cur.execute("insert into product(Category,Supplier,name,price,qty,status) values(?,?,?,?,?,?)",(
-                        self.varCat.get(),
-                        self.varSup.get(),
-                        self.varName.get(),
-                        self.varPrice.get(),
-                        self.varQty.get(),
-                        self.varStatus.get(),
-                    ))
-                    con.commit()
-                    messagebox.showinfo("Success","Product Added Successfully",parent=self.root)
-                    self.clear()
-                    self.show()
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        if self.varCat.get()=="Select" or self.varCat.get()=="Empty" or self.varSup=="Select" or self.varSup=="Empty":
+            messagebox.showerror("Error","All fields are required",parent=self.root)
+        else:
+            labels=["Category","Supplier","name","price","qty","status"]
+            data=[
+                self.varCat.get(),
+                self.varSup.get(),
+                self.varName.get(),
+                self.varPrice.get(),
+                self.varQty.get(),
+                self.varStatus.get(),
+            ]
+            if addRecord("product","name",self.varName,labels,data,self.root):
+                self.clear()
+                self.show()
 
     #Display all products in the product table
     def show(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            cur.execute("select * from product")
-            rows=cur.fetchall()
-            self.productTable.delete(*self.productTable.get_children())
-            for row in rows:
-                self.productTable.insert('',END,values=row)
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        showRecord("product",self.productTable)
 
     #Get the selected product data and populate the fields for editing or deletion
     def getData(self,ev):
-        f=self.productTable.focus()
-        content=(self.productTable.item(f))
-        row=content['values']
-        self.varPid.set(row[0])
-        self.varCat.set(row[1])
-        self.varSup.set(row[2])
-        self.varName.set(row[3])
-        self.varPrice.set(row[4])
-        self.varQty.set(row[5])
-        self.varStatus.set(row[6])
+        getRecordData(self.productTable,[self.varPid,self.varCat,self.varSup,self.varName,self.varPrice,self.varQty,self.varStatus])
 
     #Update the selected product's information in the database
     def update(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            if self.varPid.get()=="":
-                messagebox.showerror("Error","Please select product from list",parent=self.root)
-            else:
-                cur.execute("Select * from product where pid=?",(self.varPid.get(),))
-                row=cur.fetchone()
-                if row==None:
-                    messagebox.showerror("Error","Invalid Product",parent=self.root)
-                else:
-                    cur.execute("update product set Category=?,Supplier=?,name=?,price=?,qty=?,status=? where pid=?",(
-                        self.varCat.get(),
-                        self.varSup.get(),
-                        self.varName.get(),
-                        self.varPrice.get(),
-                        self.varQty.get(),
-                        self.varStatus.get(),
-                        self.varPid.get(),
-                    ))
-                    con.commit()
-                    messagebox.showinfo("Success","Product Updated Successfully",parent=self.root)
-                    self.show()
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        if self.varPid.get()=="":
+            messagebox.showerror("Error","Please select product from list",parent=self.root)
+        else:
+            labels=["Category","Supplier","name","price","qty","status"]
+            data=[
+                self.varCat.get(),
+                self.varSup.get(),
+                self.varName.get(),
+                self.varPrice.get(),
+                self.varQty.get(),
+                self.varStatus.get(),
+            ]
+            if updateRecord("product","pid",self.varPid,labels,data,self.root):
+                self.show()
 
     #Delete the selected product from the database
     def delete(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            if self.varPid.get()=="":
-                messagebox.showerror("Error","Select Product from the list",parent=self.root)
-            else:
-                cur.execute("Select * from product where pid=?",(self.varPid.get(),))
-                row=cur.fetchone()
-                if row==None:
-                    messagebox.showerror("Error","Invalid Product",parent=self.root)
-                else:
-                    op=messagebox.askyesno("Confirm","Do you really want to delete?",parent=self.root)
-                    if op:
-                        cur.execute("delete from product where pid=?",(self.varPid.get(),))
-                        con.commit()
-                        messagebox.showinfo("Delete","Product Deleted Successfully",parent=self.root)
-                        self.clear()
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        if self.varPid.get()=="":
+            messagebox.showerror("Error","Select Product from the list",parent=self.root)
+        else:
+            if deleteRecord("product","pid",self.varPid,self.root):
+                self.clear()
 
     #Clear all input fields
     def clear(self):
@@ -242,24 +189,12 @@ class productClass:
 
     #Search for products based on the selected search criteria and input text
     def search(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            if self.varSearchby.get()=="Select":
-                messagebox.showerror("Error","Select Search By option",parent=self.root)
-            elif self.varSearchtxt.get()=="":
-                messagebox.showerror("Error","Search input should be required",parent=self.root)
-            else:
-                cur.execute("select * from product where "+self.varSearchby.get()+" LIKE '%"+self.varSearchtxt.get()+"%'")
-                rows=cur.fetchall()
-                if len(rows)!=0:
-                    self.productTable.delete(*self.productTable.get_children())
-                    for row in rows:
-                        self.productTable.insert('',END,values=row)
-                else:
-                    messagebox.showerror("Error","No record found!!!",parent=self.root)
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        if self.varSearchby.get()=="Select":
+            messagebox.showerror("Error","Select Search By option",parent=self.root)
+        elif self.varSearchtxt.get()=="":
+            messagebox.showerror("Error","Search input should be required",parent=self.root)
+        else:
+            searchRecord("product",self.varSearchby.get(),self.varSearchtxt,self.productTable,self.root)
 
 if __name__=="__main__":
     root=Tk()

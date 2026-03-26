@@ -2,7 +2,7 @@ from tkinter import*
 from PIL import Image,ImageTk
 from tkinter import ttk,messagebox
 import sqlite3
-from helpers import setHeadingsAndColumns, font
+from helpers import setHeadingsAndColumns, addRecord, showRecord, getRecordData, deleteRecord, font
 import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -65,39 +65,18 @@ class categoryClass:
 
     #Add a new category to the database
     def add(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            if self.varName.get()=="":
-                messagebox.showerror("Error","Category Name must be required",parent=self.root)
-            else:
-                cur.execute("Select * from category where name=?",(self.varName.get(),))
-                row=cur.fetchone()
-                if row!=None:
-                    messagebox.showerror("Error","Category already present",parent=self.root)
-                else:
-                    cur.execute("insert into category(name) values(?)",(
-                        self.varName.get(),
-                    ))
-                    con.commit()
-                    messagebox.showinfo("Success","Category Added Successfully",parent=self.root)
-                    self.clear()
-                    self.show()
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        if self.varName.get()=="":
+            messagebox.showerror("Error","Category Name must be required",parent=self.root)
+        else:
+            labels=["name"]
+            data=[self.varName.get()]
+            if addRecord("category","name",self.varName,labels,data,self.root):
+                self.clear()
+                self.show()
 
     #Display all categories in the category table
     def show(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            cur.execute("select * from category")
-            rows=cur.fetchall()
-            self.categoryTable.delete(*self.categoryTable.get_children())
-            for row in rows:
-                self.categoryTable.insert('',END,values=row)
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        showRecord("category",self.categoryTable)
 
     #Clears all fields and resets the form
     def clear(self):
@@ -106,34 +85,16 @@ class categoryClass:
         self.show()
 
     #Get the selected category data and populate the fields for editing or deletion
-    def getData(self):
-        f=self.categoryTable.focus()
-        content=(self.categoryTable.item(f))
-        row=content['values']
-        self.varCatId.set(row[0])
-        self.varName.set(row[1])
+    def getData(self,ev):
+        getRecordData(self.categoryTable,[self.varCatId,self.varName])
 
     #Delete the selected category from the database
     def delete(self):
-        con=sqlite3.connect(database=r'ims.db')
-        cur=con.cursor()
-        try:
-            if self.varCatId.get()=="":
-                messagebox.showerror("Error","Category name must be required",parent=self.root)
-            else:
-                cur.execute("Select * from category where cid=?",(self.varCatId.get(),))
-                row=cur.fetchone()
-                if row==None:
-                    messagebox.showerror("Error","Invalid Category Name",parent=self.root)
-                else:
-                    op=messagebox.askyesno("Confirm","Do you really want to delete?",parent=self.root)
-                    if op:
-                        cur.execute("delete from category where cid=?",(self.varCatId.get(),))
-                        con.commit()
-                        messagebox.showinfo("Delete","Category Deleted Successfully",parent=self.root)
-                        self.clear()
-        except Exception as ex:
-            messagebox.showerror("Error",f"Error due to : {str(ex)}")
+        if self.varCatId.get()=="":
+            messagebox.showerror("Error","Category name must be required",parent=self.root)
+        else:
+            if deleteRecord("category","cid",self.varCatId,self.root):
+                self.clear()
 
 
 
